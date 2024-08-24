@@ -22,6 +22,7 @@
         "^config/(.*)$",
         "^context/(.*)$",
         "^hooks/(.*)$",
+        "^modules/(.*)$",
         "^lib/(.*)$",
         "^pages/(.*)$",
         "^providers/(.*)$",

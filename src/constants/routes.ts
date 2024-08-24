@@ -1,5 +1,5 @@
 export const routes = {
-    home: '/',
+    main: '/',
     catalogue: '/catalogue',
     cart: '/cart',
     orders: '/orders',
@@ -10,7 +10,7 @@ export const routes = {
 } as const
 
 export const publicRoutes = [
-    routes.home,
+    routes.main,
     routes.signIn,
     routes.signUp,
     routes.passwordReset

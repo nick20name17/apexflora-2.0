@@ -9,7 +9,7 @@ interface ErrorProps {
 
 export const ErrorPage: React.FC<ErrorProps> = ({ message = 'Page not found' }) => {
     const navigate = useNavigate()
-    const onClick = () => navigate(routes.home)
+    const onClick = () => navigate(routes.main)
 
     return (
         <div className='flex min-h-[100vh] items-center justify-center'>

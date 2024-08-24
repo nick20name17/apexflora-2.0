@@ -1,6 +1,6 @@
 import { CartPage } from './cart-page'
 import { CataloguePage } from './catalogue-page'
-import { HomePage } from './home-page'
+import { MainPage } from './main-page'
 import { OrdersPage } from './orders-page'
 import { PasswordResetPage } from './password-reset-page'
 import { SettingsPage } from './settings-page'
@@ -10,7 +10,7 @@ import { SignInPage } from './sing-in-page'
 export {
     CartPage,
     CataloguePage,
-    HomePage,
+    MainPage,
     OrdersPage,
     PasswordResetPage,
     SettingsPage,

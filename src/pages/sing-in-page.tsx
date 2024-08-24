@@ -1,3 +1,5 @@
+import { SignIn } from '@/modules'
+
 export const SignInPage = () => {
-    return <div>SignInPage</div>
+    return <SignIn />
 }

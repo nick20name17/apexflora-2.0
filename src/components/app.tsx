@@ -6,7 +6,7 @@ import { routes } from '@/constants/routes'
 import {
     CartPage,
     CataloguePage,
-    HomePage,
+    MainPage,
     OrdersPage,
     PasswordResetPage,
     SettingsPage,
@@ -14,21 +14,16 @@ import {
     SignUpPage
 } from '@/pages'
 import { ErrorPage } from '@/pages/error-page'
-import { RequireAuthProvider } from '@/providers/require-auth-provider'
 
 const router = createBrowserRouter([
     {
-        path: routes.home,
-        element: (
-            <RequireAuthProvider>
-                <Layout />
-            </RequireAuthProvider>
-        ),
+        path: routes.main,
+        element: <Layout />,
         errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <HomePage />
+                element: <MainPage />
             },
             {
                 path: routes.signIn,

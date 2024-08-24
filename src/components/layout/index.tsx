@@ -8,14 +8,11 @@ import { ErrorPage } from '@/pages/error-page'
 export const Layout = () => (
     <>
         <MetaHead />
-        <main className='px-3'>
+        <main>
             <ErrorBoundary fallback={<ErrorPage message='Something went wrong' />}>
                 <Outlet />
             </ErrorBoundary>
         </main>
-        <Toaster
-            richColors
-            duration={5000}
-        />
+        <Toaster />
     </>
 )

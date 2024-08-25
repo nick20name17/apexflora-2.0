@@ -1,6 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary'
 import { Outlet } from 'react-router-dom'
 
+import { Footer } from './footer'
 import { Header } from './header'
 import { MetaHead } from '@/components/meta-head'
 import { Toaster } from '@/components/ui/sonner'
@@ -15,6 +16,7 @@ export const Layout = () => (
                 <Outlet />
             </ErrorBoundary>
         </main>
+        <Footer />
         <Toaster />
     </>
 )

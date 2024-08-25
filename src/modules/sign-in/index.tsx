@@ -37,33 +37,29 @@ export const SignIn = () => {
 
                 <div className='flex items-center gap-x-2'>
                     <span className='max-sm:hidden'> Ми у соц. мережах:</span>
-                    <Button
-                        variant='link'
-                        asChild
+                    <Link
+                        className='mr-2 flex items-center gap-x-1 hover:!text-accent'
+                        to='https://www.facebook.com/apexflora.ua/'
                     >
-                        <Link to='https://www.facebook.com/apexflora.ua/'>
-                            <Facebook className='mr-1 size-4' />
-                            Facebook
-                        </Link>
-                    </Button>
-                    <Button
-                        variant='link'
-                        asChild
+                        <Facebook className='size-4' />
+                        Facebook
+                    </Link>
+
+                    <Link
+                        className='mr-2 flex items-center gap-x-1 hover:!text-accent'
+                        to='https://t.me/apexflora_ua'
                     >
-                        <Link to='https://t.me/apexflora_ua'>
-                            <LetterText className='mr-1 size-4' />
-                            Telegram
-                        </Link>
-                    </Button>
-                    <Button
-                        variant='link'
-                        asChild
+                        <LetterText className='size-4' />
+                        Telegram
+                    </Link>
+
+                    <Link
+                        className='flex items-center gap-x-1 hover:!text-accent'
+                        to='https://www.instagram.com/apexflora.ua/'
                     >
-                        <Link to='https://www.instagram.com/apexflora.ua/'>
-                            <Instagram className='mr-1 size-4' />
-                            instagram
-                        </Link>
-                    </Button>
+                        <Instagram className='size-4' />
+                        instagram
+                    </Link>
                 </div>
             </footer>
         </div>

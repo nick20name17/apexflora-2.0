@@ -48,6 +48,8 @@ export const ForgetPassword = () => {
         })
 
     const handlePasswordReset = async (data: FormData) => {
+        console.log(data)
+
         try {
             successToast('Password reset link sent to your email')
             form.reset()

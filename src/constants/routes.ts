@@ -6,7 +6,8 @@ export const routes = {
     settings: '/settings',
     signUp: '/sign-up',
     signIn: '/sign-in',
-    passwordReset: '/password-reset'
+    passwordReset: '/password-reset',
+    paymentAndDelivery: '/payment-and-delivery'
 } as const
 
 export const publicRoutes = [

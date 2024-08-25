@@ -1,7 +1,8 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { AuthLayout } from './layout/auth-layout'
 import '@/assets/styles/global.css'
-import { Layout } from '@/components/layout'
+import { Layout } from '@/components/layout/layout'
 import { routes } from '@/constants/routes'
 import {
     CartPage,
@@ -26,14 +27,6 @@ const router = createBrowserRouter([
                 element: <MainPage />
             },
             {
-                path: routes.signIn,
-                element: <SignInPage />
-            },
-            {
-                path: routes.signUp,
-                element: <SignUpPage />
-            },
-            {
                 path: routes.catalogue,
                 element: <CataloguePage />
             },
@@ -52,6 +45,21 @@ const router = createBrowserRouter([
             {
                 path: routes.passwordReset,
                 element: <PasswordResetPage />
+            }
+        ]
+    },
+    {
+        path: routes.main,
+        element: <AuthLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: routes.signIn,
+                element: <SignInPage />
+            },
+            {
+                path: routes.signUp,
+                element: <SignUpPage />
             }
         ]
     },

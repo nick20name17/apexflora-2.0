@@ -9,14 +9,12 @@ export const Logo: React.FC<LogoProps> = ({ className }) => {
     return (
         <Link
             className={cn(
-                'block h-[60px] w-[98px] rounded-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                'block rounded-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 className
             )}
             to={routes.main}
         >
             <svg
-                width='98'
-                height='60'
                 viewBox='0 0 98 60'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'

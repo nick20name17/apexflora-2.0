@@ -14,7 +14,7 @@ export const SignIn = () => {
         >
             <section className='flex items-center justify-center px-2 pt-20'>
                 <div>
-                    <Logo className='mx-auto' />
+                    <Logo className='mx-auto h-[60px] w-[98px]' />
                     <div className='mt-10 flex w-[400px] flex-col gap-y-5 rounded-lg bg-background p-10 max-md:w-80 max-md:p-6'>
                         <h1 className='text-center text-[32px] font-bold text-primary'>
                             Вхід
@@ -31,12 +31,7 @@ export const SignIn = () => {
                         variant='link'
                         asChild
                     >
-                        <Link
-                            className='text-background hover:!text-accent'
-                            to='tel:+380800501930'
-                        >
-                            0 800 501 930
-                        </Link>
+                        <Link to='tel:+380800501930'>0 800 501 930</Link>
                     </Button>
                 </span>
 
@@ -46,10 +41,7 @@ export const SignIn = () => {
                         variant='link'
                         asChild
                     >
-                        <Link
-                            className='text-background hover:!text-accent'
-                            to='https://www.facebook.com/apexflora.ua/'
-                        >
+                        <Link to='https://www.facebook.com/apexflora.ua/'>
                             <Facebook className='mr-1 size-4' />
                             Facebook
                         </Link>
@@ -58,10 +50,7 @@ export const SignIn = () => {
                         variant='link'
                         asChild
                     >
-                        <Link
-                            className='text-background hover:!text-accent'
-                            to='https://t.me/apexflora_ua'
-                        >
+                        <Link to='https://t.me/apexflora_ua'>
                             <LetterText className='mr-1 size-4' />
                             Telegram
                         </Link>
@@ -70,10 +59,7 @@ export const SignIn = () => {
                         variant='link'
                         asChild
                     >
-                        <Link
-                            className='text-background hover:!text-accent'
-                            to='https://www.instagram.com/apexflora.ua/'
-                        >
+                        <Link to='https://www.instagram.com/apexflora.ua/'>
                             <Instagram className='mr-1 size-4' />
                             instagram
                         </Link>

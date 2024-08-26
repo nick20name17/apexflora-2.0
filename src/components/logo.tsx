@@ -19,7 +19,7 @@ export const Logo: React.FC<LogoProps> = ({ className }) => {
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
             >
-                <g clip-path='url(#clip0_146_4808)'>
+                <g clipPath='url(#clip0_146_4808)'>
                     <path
                         d='M10.2229 0L0 27.7161H4.52649L7.20439 20.2728H18.6719L21.3498 27.7161H25.8763L15.6547 0H10.2229ZM8.75163 16.0352L12.9388 4.43447L17.1259 16.0352H8.75163Z'
                         fill='white'

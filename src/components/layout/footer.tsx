@@ -1,8 +1,14 @@
-import { Facebook, Instagram, LetterText } from 'lucide-react'
+import { ChevronDown, Facebook, Instagram, LetterText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { Logo } from '../logo'
 
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { routes } from '@/constants/routes'
 
 export const Footer = () => {
@@ -12,9 +18,41 @@ export const Footer = () => {
                 <div className='flex items-start justify-between gap-8 max-md:flex-col'>
                     <div>
                         <Logo className='h-[44px] w-[72px]' />
-                        <div className='mt-4 text-background'>
+                        <div className='mt-4 text-sm text-background'>
                             З’явилися питання? Зв’яжіться з нами
                         </div>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className='mt-0.5 flex items-center gap-x-2 border-none bg-transparent px-1 text-left text-xl text-background'>
+                                067 999 95 69
+                                <ChevronDown className='size-4' />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuItem>
+                                    <Link
+                                        tabIndex={-1}
+                                        to='tel:+380679999569'
+                                    >
+                                        067 999 95 69
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <Link
+                                        tabIndex={-1}
+                                        to='tel:+380639999569'
+                                    >
+                                        063 999 95 69
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <Link
+                                        tabIndex={-1}
+                                        to='tel:+380639999569'
+                                    >
+                                        063 999 95 69
+                                    </Link>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </div>
                     <FooterLinks />
                 </div>
@@ -22,41 +60,6 @@ export const Footer = () => {
                 <FooterBottom />
             </div>
         </footer>
-    )
-}
-
-const FooterBottom = () => {
-    return (
-        <div className='max-xs:text-left max-xs:justify-start mt-8 flex items-center justify-between gap-x-4 gap-y-2 border-t border-background pt-5 text-center text-background max-lg:flex-wrap max-lg:justify-center'>
-            Copyright 2023. All Rights Reserved
-            <div className='flex items-center gap-x-2'>
-                <span className='max-sm:hidden'>Ми у соц. мережах:</span>
-
-                <Link
-                    className='mr-2 flex items-center gap-x-1 hover:!text-accent'
-                    to='https://www.facebook.com/apexflora.ua/'
-                >
-                    <Facebook className='size-4' />
-                    Facebook
-                </Link>
-
-                <Link
-                    className='mr-2 flex items-center gap-x-1 hover:!text-accent'
-                    to='https://t.me/apexflora_ua'
-                >
-                    <LetterText className='size-4' />
-                    Telegram
-                </Link>
-
-                <Link
-                    className='flex items-center gap-x-1 hover:!text-accent'
-                    to='https://www.instagram.com/apexflora.ua/'
-                >
-                    <Instagram className='size-4' />
-                    instagram
-                </Link>
-            </div>
-        </div>
     )
 }
 
@@ -134,6 +137,41 @@ const FooterLinks = () => {
                         </Link>
                     </li>
                 </ul>
+            </div>
+        </div>
+    )
+}
+
+const FooterBottom = () => {
+    return (
+        <div className='max-xs:text-left max-xs:justify-start mt-8 flex items-center justify-between gap-x-4 gap-y-2 border-t border-background pt-5 text-center text-background max-lg:flex-wrap max-lg:justify-center'>
+            Copyright 2023. All Rights Reserved
+            <div className='flex items-center gap-x-2'>
+                <span className='max-sm:hidden'>Ми у соц. мережах:</span>
+
+                <Link
+                    className='mr-2 flex items-center gap-x-1 hover:!text-accent'
+                    to='https://www.facebook.com/apexflora.ua/'
+                >
+                    <Facebook className='size-4' />
+                    Facebook
+                </Link>
+
+                <Link
+                    className='mr-2 flex items-center gap-x-1 hover:!text-accent'
+                    to='https://t.me/apexflora_ua'
+                >
+                    <LetterText className='size-4' />
+                    Telegram
+                </Link>
+
+                <Link
+                    className='flex items-center gap-x-1 hover:!text-accent'
+                    to='https://www.instagram.com/apexflora.ua/'
+                >
+                    <Instagram className='size-4' />
+                    instagram
+                </Link>
             </div>
         </div>
     )

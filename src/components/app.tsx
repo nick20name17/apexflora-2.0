@@ -15,6 +15,7 @@ import {
     SignUpPage
 } from '@/pages'
 import { ErrorPage } from '@/pages/error-page'
+import { PaymentAndDeliveryPage } from '@/pages/payment-and-delivery'
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: routes.passwordReset,
                 element: <PasswordResetPage />
+            },
+            {
+                path: routes.paymentAndDelivery,
+                element: <PaymentAndDeliveryPage />
             }
         ]
     },

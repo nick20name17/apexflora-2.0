@@ -9,7 +9,7 @@ export const Logo: React.FC<LogoProps> = ({ className }) => {
     return (
         <Link
             className={cn(
-                'block rounded-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                'block flex-shrink-0 rounded-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 className
             )}
             to={routes.main}

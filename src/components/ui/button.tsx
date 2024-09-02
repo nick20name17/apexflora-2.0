@@ -21,7 +21,7 @@ const buttonVariants = cva(
                 link: 'text-background hover:text-primary !h-fit !p-1'
             },
             size: {
-                default: 'h-12 p-2.5',
+                default: 'h-12 p-4',
                 sm: 'h-10 rounded-md p-2.5',
                 lg: 'h-11 rounded-md px-8',
                 icon: 'h-10 w-10'

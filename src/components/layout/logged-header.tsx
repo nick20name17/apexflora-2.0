@@ -1,66 +1,22 @@
-import { ChevronDown, Menu, UserIcon } from 'lucide-react'
+import { Menu, UserIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Logo } from '../logo'
+import { SearchBar } from '../shared'
 
 import { Button } from '@/components/ui/button'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { routes } from '@/constants/routes'
 
-export const Header = () => {
+export const LoggedHeader = () => {
     return (
         <header className='h-[90px] bg-primary'>
             <div className='container flex h-full items-center justify-between'>
                 <div className='flex items-center gap-x-12 max-xs:gap-x-6'>
                     <Logo className='!h-10 !w-16' />
                     <CatalogueSheet />
-                    <div className='max-sm:hidden'>
-                        <div className='text-sm text-background max-md:hidden'>
-                            З’явилися питання? Зв’яжіться з нами
-                        </div>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className='mt-0.5 flex items-center gap-x-2 border-none bg-transparent px-1 text-left text-xl text-background'>
-                                067 999 95 69
-                                <ChevronDown className='size-4' />
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuItem asChild>
-                                    <Link
-                                        className='cursor-pointer'
-                                        tabIndex={-1}
-                                        to='tel:+380679999569'
-                                    >
-                                        067 999 95 69
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Link
-                                        className='cursor-pointer'
-                                        tabIndex={-1}
-                                        to='tel:+380639999569'
-                                    >
-                                        063 999 95 69
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <Link
-                                        className='cursor-pointer'
-                                        tabIndex={-1}
-                                        to='tel:+380639999569'
-                                    >
-                                        063 999 95 69
-                                    </Link>
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
+                    <SearchBar />
                 </div>
 
                 <div className='flex items-center gap-x-2 text-background'>

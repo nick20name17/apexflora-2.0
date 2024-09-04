@@ -67,8 +67,8 @@ export const ForgetPassword = () => {
             open={open}
             onOpenChange={setOpen}
         >
-            <DialogTrigger asChild>
-                <Button variant='link'>Забули пароль?</Button>
+            <DialogTrigger className='text-sm text-primary transition-colors hover:text-accent'>
+                Забули пароль?
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>
                 <DialogHeader className='text-left'>

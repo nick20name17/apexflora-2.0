@@ -14,14 +14,14 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { loginSchema } from '@/config/validation-schemas'
+import { signInSchema } from '@/config/validation-schemas'
 import { routes } from '@/constants/routes'
 import { useCustomForm } from '@/hooks'
 
-type SignInFormValues = z.infer<typeof loginSchema>
+type SignInFormValues = z.infer<typeof signInSchema>
 
 export const SignInForm = () => {
-    const form = useCustomForm(loginSchema)
+    const form = useCustomForm(signInSchema)
 
     const [error] = useState('')
 
@@ -89,14 +89,14 @@ export const SignInForm = () => {
                 </form>
             </Form>
 
-            <div className='mt-4 text-sm text-muted-foreground'>
+            <div className='mt-4 text-center text-sm text-muted-foreground'>
                 Новий користувач?{' '}
-                <Button
-                    asChild
-                    variant='link'
+                <Link
+                    className='text-primary transition-colors hover:text-accent'
+                    to={routes.signUp}
                 >
-                    <Link to={routes.signUp}>Зареєструйтесь</Link>
-                </Button>
+                    Зареєструйтесь
+                </Link>
             </div>
 
             {error ? (

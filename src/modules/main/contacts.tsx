@@ -23,7 +23,7 @@ export const Contacts = () => {
             <div className='flex items-start gap-12 max-lg:flex-col'>
                 <div className='w-full flex-1'>
                     <h2 className='text-[32px] text-primary'>Контакти</h2>
-                    <div className='max-xs:grid-cols-1 mt-5 grid grid-cols-[130px_repeat(auto-fit,_minmax(180px,_25%))] justify-between gap-x-6 gap-y-4'>
+                    <div className='mt-5 grid grid-cols-[130px_repeat(auto-fit,_minmax(180px,_25%))] justify-between gap-x-6 gap-y-4 max-xs:grid-cols-1'>
                         <div className='flex flex-col items-start justify-start gap-y-0.5'>
                             <div className='text-sm text-foreground/60'>
                                 Номер телефону
@@ -119,6 +119,7 @@ const ContactsForm = () => {
                                 <FormControl>
                                     <Input
                                         placeholder='Андрій'
+                                        type='text'
                                         {...field}
                                     />
                                 </FormControl>
@@ -135,6 +136,7 @@ const ContactsForm = () => {
                                 <FormLabel>Електронна пошта*</FormLabel>
                                 <FormControl>
                                     <Input
+                                        inputMode='email'
                                         placeholder='stepanenko@gmail.com'
                                         {...field}
                                     />
@@ -152,6 +154,8 @@ const ContactsForm = () => {
                                 <FormLabel>Номер телефону*</FormLabel>
                                 <FormControl>
                                     <Input
+                                        type='tel'
+                                        inputMode='tel'
                                         placeholder='38 067 999 95 69'
                                         {...field}
                                     />

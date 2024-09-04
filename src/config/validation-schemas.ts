@@ -25,15 +25,26 @@ export const emailSchema = object({
         })
 })
 
-export const loginSchema = object({
-    email: string({
-        required_error: "Це поле є обов'язковим"
-    })
-        .min(1, "Це поле є обов'язковим")
-        .email({
-            message: 'Введіть коректну електронну пошту'
-        }),
+export const signInSchema = object({
+    ...emailSchema.shape,
     ...passwordSchema
+})
+
+export const signUpSchema = object({
+    ...emailSchema.shape,
+    ...passwordSchema,
+    first_name: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    last_name: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    city: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    phone: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим")
 })
 
 export const contactsSchema = object({

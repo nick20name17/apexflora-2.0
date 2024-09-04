@@ -1,5 +1,6 @@
-import { Loader2 } from 'lucide-react'
+import { EyeIcon, EyeOffIcon, Loader2 } from 'lucide-react'
 import { useState } from 'react'
+import type { ControllerRenderProps } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import type { z } from 'zod'
 
@@ -140,11 +141,7 @@ export const SignUpForm = () => {
                                     <FormItem>
                                         <FormLabel>Пароль</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                placeholder='.......'
-                                                type='password'
-                                                {...field}
-                                            />
+                                            <PasswordInputWithReveal {...field} />
                                         </FormControl>
 
                                         <FormMessage />
@@ -159,7 +156,7 @@ export const SignUpForm = () => {
                         type='submit'
                     >
                         {isLoading ? (
-                            <Loader2 className='h-4 w-4 animate-spin' />
+                            <Loader2 className='size-4 animate-spin' />
                         ) : (
                             'Продовжити'
                         )}
@@ -180,6 +177,42 @@ export const SignUpForm = () => {
             {error ? (
                 <div className='mt-4 text-sm font-medium text-destructive'>{error}</div>
             ) : null}
+        </div>
+    )
+}
+
+const PasswordInputWithReveal = (
+    props: ControllerRenderProps<SignUpFormValues, 'password'>
+) => {
+    const [revealPassword, setRevealPassword] = useState(false)
+
+    const onPasswordReveal = () => {
+        setRevealPassword(!revealPassword)
+    }
+
+    return (
+        <div className='relative'>
+            <Input
+                id='password'
+                type={revealPassword ? 'text' : 'password'}
+                placeholder='••••••••'
+                className='pr-10'
+                {...props}
+            />
+            <Button
+                onClick={onPasswordReveal}
+                type='button'
+                variant='ghost'
+                size='icon'
+                className='absolute right-4 top-1/2 size-8 -translate-y-1/2'
+            >
+                {revealPassword ? (
+                    <EyeIcon className='size-4' />
+                ) : (
+                    <EyeOffIcon className='size-4' />
+                )}
+                <span className='sr-only'>Перемкнути видимість паролю</span>
+            </Button>
         </div>
     )
 }

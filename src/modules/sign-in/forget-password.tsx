@@ -72,7 +72,7 @@ export const ForgetPassword = () => {
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>
                 <DialogHeader className='text-left'>
-                    <DialogTitle>Password reset</DialogTitle>
+                    <DialogTitle>Відновлення пароля</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                     <form
@@ -84,7 +84,7 @@ export const ForgetPassword = () => {
                             name='email'
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Електронна пошта</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder='nickname@gmail.com'
@@ -102,9 +102,9 @@ export const ForgetPassword = () => {
                             type='submit'
                         >
                             {isLoading ? (
-                                <Loader2 className='h-4 w-4 animate-spin' />
+                                <Loader2 className='size-4 animate-spin' />
                             ) : (
-                                'Send reset link'
+                                'Надіслати посилання для відновлення'
                             )}
                         </Button>
                     </form>

@@ -1,3 +1,5 @@
+import { Settings } from '@/modules'
+
 export const SettingsPage = () => {
-    return <div>SettingsPage</div>
+    return <Settings />
 }

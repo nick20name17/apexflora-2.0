@@ -31,7 +31,7 @@ const SettingsSidebar = () => {
     const { pathname } = useLocation()
 
     return (
-        <aside className='w-72 bg-secondary max-lg:hidden'>
+        <aside className='min-w-72 bg-secondary max-lg:hidden'>
             <div className='flex items-center gap-x-2.5 bg-primary p-4 text-background'>
                 <UserIcon className='size-8 flex-shrink-0' />
                 <div className='flex flex-col'>
@@ -41,7 +41,7 @@ const SettingsSidebar = () => {
             </div>
 
             <nav className='px-4 py-6'>
-                <ul className='flex h-full min-h-[650px] flex-col gap-y-2'>
+                <ul className='flex h-full min-h-[600px] flex-col gap-y-2'>
                     <li
                         className={cn(
                             'cursor-pointer rounded-lg text-foreground transition-colors hover:bg-primary/10 hover:text-primary',

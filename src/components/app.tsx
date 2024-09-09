@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { AuthLayout } from './layout/auth-layout'
 import { SettingsLayout } from './layout/settings-layout'
 import '@/assets/styles/global.css'
 import { Layout } from '@/components/layout/layout'
@@ -64,13 +65,7 @@ const router = createBrowserRouter([
     },
     {
         path: routes.main,
-        element: (
-            <Layout
-                showFooter={false}
-                showHeader={false}
-                useContainer={false}
-            />
-        ),
+        element: <AuthLayout />,
         errorElement: <ErrorPage />,
         children: [
             {

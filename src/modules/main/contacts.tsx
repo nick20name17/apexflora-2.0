@@ -65,7 +65,9 @@ export const Contacts = () => {
                             м. Рівне, Дворецька 123а
                         </div>
                         <div className='flex flex-col items-start justify-start gap-y-0.5'>
-                            <div className='text-sm text-foreground/60'>Наша адреса</div>
+                            <div className='text-sm text-foreground/60'>
+                                Графік роботи
+                            </div>
                             <span className='whitespace-nowrap'>
                                 пн - сб 09:00 - 18:00
                             </span>
@@ -102,7 +104,7 @@ const ContactsForm = () => {
                     Зворотній зв’язок
                 </h3>
                 <p className='mt-2 text-center text-sm text-foreground/50'>
-                    Залиште свої данні і наш менеджер зв'ядеться з вами
+                    Залиште свої данні і наш менеджер зв'яжеться з вами
                 </p>
             </div>
             <Form {...form}>
@@ -151,7 +153,7 @@ const ContactsForm = () => {
                         name='phone'
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Номер телефону*</FormLabel>
+                                <FormLabel>Номер телефону</FormLabel>
                                 <FormControl>
                                     <Input
                                         type='tel'

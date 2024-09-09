@@ -7,7 +7,7 @@ interface ErrorProps {
     message?: string
 }
 
-export const ErrorPage: React.FC<ErrorProps> = ({ message = 'Page not found' }) => {
+export const ErrorPage = ({ message = 'Page not found' }: ErrorProps) => {
     const navigate = useNavigate()
     const onClick = () => navigate(routes.main)
 

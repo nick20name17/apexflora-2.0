@@ -19,6 +19,7 @@ export const SearchBar = () => {
             />
 
             <Button
+                tabIndex={-1}
                 onClick={() => setSearch('')}
                 className={cn(
                     'absolute top-1/2 size-8 -translate-y-1/2 transition-all',

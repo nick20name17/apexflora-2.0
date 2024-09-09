@@ -1,4 +1,4 @@
-import { Menu, UserIcon } from 'lucide-react'
+import { Heart, Menu, ShoppingBasket, UserIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -19,20 +19,27 @@ export const LoggedHeader = () => {
                     <SearchBar />
                 </div>
 
-                <div className='flex items-center gap-x-2 text-background'>
-                    <UserIcon className='h-5 w-5' />
+                <div className='flex items-center gap-x-6 text-background'>
                     <Link
-                        className='text-background transition-colors hover:text-accent'
-                        to={routes.signIn}
+                        className='flex items-center gap-x-2 transition-colors hover:text-accent'
+                        to={routes.favorites}
                     >
-                        Вхід
+                        <Heart className='size-5' />
+                        Збережені
                     </Link>
-                    /
                     <Link
-                        className='text-background transition-colors hover:text-accent'
-                        to={routes.signUp}
+                        className='flex items-center gap-x-2 transition-colors hover:text-accent'
+                        to={routes.cart}
                     >
-                        Реєстрація
+                        <ShoppingBasket className='size-5' />
+                        293 ₴
+                    </Link>
+                    <Link
+                        className='flex items-center gap-x-2 transition-colors hover:text-accent'
+                        to={routes.settings}
+                    >
+                        <UserIcon className='size-5' />
+                        Головний Адмін
                     </Link>
                 </div>
             </div>

@@ -10,10 +10,11 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { routes } from '@/constants/routes'
+import { cn } from '@/lib/utils'
 
-export const Footer = () => {
+export const Footer = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
     return (
-        <footer className='mt-32 bg-primary px-6 pb-6 pt-14'>
+        <footer className={cn('bg-primary px-6 pb-6 pt-14', className)}>
             <div className='container px-0'>
                 <div className='flex items-start justify-between gap-8 max-md:flex-col'>
                     <div>
@@ -65,7 +66,7 @@ export const Footer = () => {
 
 const FooterLinks = () => {
     return (
-        <div className='max-xs:grid-cols-1 grid grid-cols-3 gap-6 text-background max-md:w-full max-md:border-t max-md:border-background max-md:py-5'>
+        <div className='grid grid-cols-3 gap-6 text-background max-md:w-full max-md:border-t max-md:border-background max-md:py-5 max-xs:grid-cols-1'>
             <div>
                 <h3 className='sr-only font-bold'>Авторизація</h3>
                 <ul className='flex flex-col gap-y-2'>
@@ -144,7 +145,7 @@ const FooterLinks = () => {
 
 const FooterBottom = () => {
     return (
-        <div className='max-xs:text-left max-xs:justify-start mt-8 flex items-center justify-between gap-x-4 gap-y-2 border-t border-background pt-5 text-center text-background max-lg:flex-wrap max-lg:justify-center'>
+        <div className='mt-8 flex items-center justify-between gap-x-4 gap-y-2 border-t border-background pt-5 text-center text-background max-lg:flex-wrap max-lg:justify-center max-xs:justify-start max-xs:text-left'>
             Copyright 2023. All Rights Reserved
             <div className='flex items-center gap-x-2'>
                 <span className='max-sm:hidden'>Ми у соц. мережах:</span>

@@ -1,3 +1,5 @@
+import { Catalogue } from '@/modules'
+
 export const CataloguePage = () => {
-    return <div>CataloguePage</div>
+    return <Catalogue />
 }

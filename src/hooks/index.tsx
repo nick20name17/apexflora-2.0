@@ -1,4 +1,5 @@
+import { useBodyScrollLock } from './use-body-scroll-lock'
 import { useCustomForm } from './use-custom-form'
 import { usePageName } from './use-page-name'
 
-export { useCustomForm, usePageName }
+export { useBodyScrollLock, useCustomForm, usePageName }

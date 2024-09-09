@@ -5,18 +5,29 @@ import { Footer } from './footer'
 import { LoggedHeader } from './logged-header'
 import { MetaHead } from '@/components/meta-head'
 import { Toaster } from '@/components/ui/sonner'
-import { ErrorPage } from '@/pages/error-page'
+import { cn } from '@/lib/utils'
+import { ErrorPage } from '@/pages'
 
-export const Layout = () => (
+interface LayoutProps {
+    showHeader?: boolean
+    showFooter?: boolean
+    useContainer?: boolean
+}
+
+export const Layout = ({
+    showHeader = true,
+    showFooter = true,
+    useContainer = true
+}: LayoutProps) => (
     <>
         <MetaHead />
-        <LoggedHeader />
-        <main className='container'>
+        {showHeader ? <LoggedHeader /> : null}
+        <main className={cn(useContainer ? 'container' : 'px-4')}>
             <ErrorBoundary fallback={<ErrorPage message='Something went wrong' />}>
                 <Outlet />
             </ErrorBoundary>
         </main>
-        <Footer />
+        {showFooter ? <Footer className='mt-32' /> : null}
         <Toaster />
     </>
 )

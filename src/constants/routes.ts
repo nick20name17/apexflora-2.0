@@ -7,7 +7,11 @@ export const routes = {
     signUp: '/sign-up',
     signIn: '/sign-in',
     passwordReset: '/password-reset',
-    paymentAndDelivery: '/payment-and-delivery'
+    paymentAndDelivery: '/payment-and-delivery',
+    favorites: '/favorites',
+    loyaltyProgram: '/loyalty-program',
+    balance: '/balance',
+    addvertisement: '/addvertisement'
 } as const
 
 export const publicRoutes = [

@@ -1,21 +1,25 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { AuthLayout } from './layout/auth-layout'
+import { SettingsLayout } from './layout/settings-layout'
 import '@/assets/styles/global.css'
 import { Layout } from '@/components/layout/layout'
 import { routes } from '@/constants/routes'
 import {
+    AddvertismentPage,
+    BalancePage,
     CartPage,
     CataloguePage,
+    ErrorPage,
+    FavoritesPage,
+    LoyaltyProgramPage,
     MainPage,
     OrdersPage,
     PasswordResetPage,
+    PaymentAndDeliveryPage,
     SettingsPage,
     SignInPage,
     SignUpPage
 } from '@/pages'
-import { ErrorPage } from '@/pages/error-page'
-import { PaymentAndDeliveryPage } from '@/pages/payment-and-delivery'
 
 const router = createBrowserRouter([
     {
@@ -27,21 +31,10 @@ const router = createBrowserRouter([
                 index: true,
                 element: <MainPage />
             },
-            {
-                path: routes.catalogue,
-                element: <CataloguePage />
-            },
+
             {
                 path: routes.cart,
                 element: <CartPage />
-            },
-            {
-                path: routes.orders,
-                element: <OrdersPage />
-            },
-            {
-                path: routes.settings,
-                element: <SettingsPage />
             },
             {
                 path: routes.passwordReset,
@@ -54,8 +47,30 @@ const router = createBrowserRouter([
         ]
     },
     {
+        path: routes.catalogue,
+        element: (
+            <Layout
+                showFooter={false}
+                useContainer={false}
+            />
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                index: true,
+                element: <CataloguePage />
+            }
+        ]
+    },
+    {
         path: routes.main,
-        element: <AuthLayout />,
+        element: (
+            <Layout
+                showFooter={false}
+                showHeader={false}
+                useContainer={false}
+            />
+        ),
         errorElement: <ErrorPage />,
         children: [
             {
@@ -65,6 +80,37 @@ const router = createBrowserRouter([
             {
                 path: routes.signUp,
                 element: <SignUpPage />
+            }
+        ]
+    },
+    {
+        path: routes.main,
+        element: <SettingsLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: routes.settings,
+                element: <SettingsPage />
+            },
+            {
+                path: routes.orders,
+                element: <OrdersPage />
+            },
+            {
+                path: routes.favorites,
+                element: <FavoritesPage />
+            },
+            {
+                path: routes.loyaltyProgram,
+                element: <LoyaltyProgramPage />
+            },
+            {
+                path: routes.balance,
+                element: <BalancePage />
+            },
+            {
+                path: routes.addvertisement,
+                element: <AddvertismentPage />
             }
         ]
     },

@@ -1,10 +1,16 @@
+import { motion } from 'framer-motion'
 import { Car, Ship, TimerIcon } from 'lucide-react'
 
 import { Skeleton } from '../ui/skeleton'
 
+import { animations } from '@/config/animations'
+
 export const ProductTileCard = () => {
     return (
-        <article className='flex h-40 items-start overflow-hidden rounded-md border border-foreground/25 max-md:h-auto max-md:flex-col'>
+        <motion.article
+            {...animations.popLayout}
+            className='flex h-40 items-start overflow-hidden rounded-md border border-foreground/25 max-md:h-auto max-md:flex-col'
+        >
             <div className='h-full w-32 max-md:h-52 max-md:w-full max-xs:h-60'>
                 {false ? (
                     <Skeleton className='h-full w-full rounded-none object-cover' />
@@ -48,12 +54,15 @@ export const ProductTileCard = () => {
                         <span className='text-primary'>20</span>
                     </div>
                 </div>
-                <div className='mt-2 flex items-center gap-x-2 border-t border-t-primary pt-2 text-foreground/60'>
-                    <Ship className='size-6' />
-                    <TimerIcon className='size-6' />
-                    <Car className='size-6' />
+                <div className='mt-2 flex items-center justify-between gap-x-2 border-t border-t-primary pt-2'>
+                    <div className='flex items-center gap-x-2 text-foreground/60'>
+                        <Ship className='size-6' />
+                        <TimerIcon className='size-6' />
+                        <Car className='size-6' />
+                    </div>
+                    <span className='text-primary'> 29 ₴</span>
                 </div>
             </div>
-        </article>
+        </motion.article>
     )
 }

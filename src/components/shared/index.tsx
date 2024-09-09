@@ -1,3 +1,4 @@
+import { OrderCard } from './order-card'
 import { OrderingSelect } from './ordering-select'
 import { PhoneDropdown } from './phone-dropdown'
 import { ProductRowCard } from './product-row-card'
@@ -6,6 +7,7 @@ import { SearchBar } from './search-bar'
 import { ViewTabs } from './view-tabs'
 
 export {
+    OrderCard,
     OrderingSelect,
     PhoneDropdown,
     ProductRowCard,

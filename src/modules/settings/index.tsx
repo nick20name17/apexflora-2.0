@@ -17,6 +17,11 @@ import {
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger
+} from '@/components/ui/collapsible'
 import { routes } from '@/constants/routes'
 
 export const Settings = () => {
@@ -67,7 +72,7 @@ export const Settings = () => {
                         </Link>
                     </div>
                 </div>
-                <UserInfo />
+                <UsersInfo />
                 <OrdersRecepients />
                 <OrdersAdresses />
                 <ChangePassword />
@@ -76,89 +81,99 @@ export const Settings = () => {
     )
 }
 
-const UserInfo = () => {
-    const [isEditing, setIsEditing] = useState(false)
+const UsersInfo = () => {
+    const [open, setOpen] = useState(false)
 
     return (
-        <div className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
-            <div className='flex w-full items-center justify-between gap-x-4'>
+        <Collapsible className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
+            <CollapsibleTrigger className='flex w-full items-center justify-between gap-x-4'>
                 <h2 className='flex items-center gap-x-2 text-2xl font-bold text-primary'>
                     <User className='size-6' /> Інформація про користувача
                 </h2>
                 <Button
-                    onClick={() => setIsEditing(!isEditing)}
+                    onClick={() => setOpen(!open)}
                     size='icon'
                     variant='outline'
                 >
                     <Edit className='size-4' />
                 </Button>
-            </div>
-            <div className='mt-3 flex items-center justify-between gap-x-4 border-t border-t-secondary pt-3'>
-                {isEditing ? (
+            </CollapsibleTrigger>
+            <div className='mt-3 border-t border-t-secondary pt-3'>
+                {open ? null : <UserInfo />}
+                <CollapsibleContent>
                     <UserInfoForm />
-                ) : (
-                    <div className='flex w-full flex-wrap items-center justify-between gap-6 max-sm:flex-col max-sm:items-start'>
-                        <div className='flex flex-col'>
-                            <span className='text-sm text-foreground/60'>Ім’я</span>
-                            <span>Головний</span>
-                        </div>
-                        <div className='flex flex-col'>
-                            <span className='text-sm text-foreground/60'>Прізвище</span>
-                            <span>Адмін</span>
-                        </div>
-                        <div className='flex flex-col'>
-                            <span className='text-sm text-foreground/60'>
-                                Номер телефону
-                            </span>
-                            <Link
-                                className='text-primary transition-colors hover:text-accent'
-                                to='tel:+380679999569'
-                            >
-                                <span>067 999 95 69</span>
-                            </Link>
-                        </div>
-                        <div className='flex flex-col'>
-                            <span className='text-sm text-foreground/60'>
-                                Електронна пошта
-                            </span>
-                            <Link
-                                className='text-primary transition-colors hover:text-accent'
-                                to='mailto:apexflora.ua@gmail.com'
-                            >
-                                <span>admin@apexflora.com.ua</span>
-                            </Link>
-                        </div>
-                        <div className='flex flex-col'>
-                            <span className='text-sm text-foreground/60'>Компанія</span>
-                            <span>Apexflora</span>
-                        </div>
-                    </div>
-                )}
+                </CollapsibleContent>
+            </div>
+        </Collapsible>
+    )
+}
+
+const UserInfo = () => {
+    return (
+        <div className='flex w-full flex-wrap items-center justify-between gap-6 max-sm:flex-col max-sm:items-start'>
+            <div className='flex flex-col'>
+                <span className='text-sm text-foreground/60'>Ім’я</span>
+                <span>Головний</span>
+            </div>
+            <div className='flex flex-col'>
+                <span className='text-sm text-foreground/60'>Прізвище</span>
+                <span>Адмін</span>
+            </div>
+            <div className='flex flex-col'>
+                <span className='text-sm text-foreground/60'>Номер телефону</span>
+                <Link
+                    className='text-primary transition-colors hover:text-accent'
+                    to='tel:+380679999569'
+                >
+                    <span>067 999 95 69</span>
+                </Link>
+            </div>
+            <div className='flex flex-col'>
+                <span className='text-sm text-foreground/60'>Електронна пошта</span>
+                <Link
+                    className='text-primary transition-colors hover:text-accent'
+                    to='mailto:apexflora.ua@gmail.com'
+                >
+                    <span>admin@apexflora.com.ua</span>
+                </Link>
+            </div>
+            <div className='flex flex-col'>
+                <span className='text-sm text-foreground/60'>Компанія</span>
+                <span>Apexflora</span>
             </div>
         </div>
     )
 }
 
 const OrdersRecepients = () => {
-    const [isEditing, setIsEditing] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const recepientLength = 1
 
     return (
-        <div className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
-            <div className='flex w-full items-center justify-between gap-x-4'>
+        <Collapsible
+            open={open}
+            onOpenChange={setOpen}
+            className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'
+        >
+            <CollapsibleTrigger className='flex w-full items-center justify-between gap-x-4'>
                 <h2 className='flex items-center gap-x-2 text-2xl font-bold text-primary'>
                     <User className='size-6' /> Отримувач замовлень
                 </h2>
                 <Button
-                    onClick={() => setIsEditing(!isEditing)}
+                    onClick={() => setOpen(!open)}
                     size='icon'
                     variant='outline'
                 >
                     <Plus className='size-4' />
                 </Button>
-            </div>
-            <div className='mt-3 flex items-center justify-between gap-x-4 border-t border-t-secondary pt-3'>
+            </CollapsibleTrigger>
+            <div className='mt-3 border-t border-t-secondary pt-3'>
+                {open ? null : (
+                    <div className='flex w-full flex-col gap-y-4'>
+                        <OrdersRecepient />
+                    </div>
+                )}
                 {recepientLength ? (
                     ''
                 ) : (
@@ -166,15 +181,11 @@ const OrdersRecepients = () => {
                         Додайте отримувача замовлень
                     </span>
                 )}
-                {isEditing ? (
+                <CollapsibleContent>
                     <OrdersRecepientForm />
-                ) : (
-                    <div className='flex w-full flex-col gap-y-4'>
-                        <OrdersRecepient />
-                    </div>
-                )}
+                </CollapsibleContent>
             </div>
-        </div>
+        </Collapsible>
     )
 }
 
@@ -218,25 +229,25 @@ const OrdersRecepient = () => {
 }
 
 const OrdersAdresses = () => {
-    const [isEditing, setIsEditing] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const recepientLength = 1
 
     return (
-        <div className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
-            <div className='flex w-full items-center justify-between gap-x-4'>
+        <Collapsible className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
+            <CollapsibleTrigger className='flex w-full items-center justify-between gap-x-4'>
                 <h2 className='flex items-center gap-x-2 text-2xl font-bold text-primary'>
                     <MapPin className='size-6' /> Адреси доставки
                 </h2>
                 <Button
-                    onClick={() => setIsEditing(!isEditing)}
+                    onClick={() => setOpen(!open)}
                     size='icon'
                     variant='outline'
                 >
                     <Plus className='size-4' />
                 </Button>
-            </div>
-            <div className='mt-3 flex items-center justify-between gap-x-4 border-t border-t-secondary pt-3'>
+            </CollapsibleTrigger>
+            <div className='mt-3 border-t border-t-secondary pt-3'>
                 {recepientLength ? (
                     ''
                 ) : (
@@ -244,15 +255,17 @@ const OrdersAdresses = () => {
                         Додайте адресу доставки
                     </span>
                 )}
-                {isEditing ? (
-                    <OrdersAddressForm />
-                ) : (
+
+                {open ? null : (
                     <div className='flex w-full flex-col gap-y-4'>
                         <OrdersAddress />
                     </div>
                 )}
+                <CollapsibleContent>
+                    <OrdersAddressForm />
+                </CollapsibleContent>
             </div>
-        </div>
+        </Collapsible>
     )
 }
 
@@ -274,26 +287,32 @@ const OrdersAddress = () => {
 }
 
 const ChangePassword = () => {
-    const [isEditing, setIsEditing] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
-        <div className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
-            <div className='flex w-full items-center justify-between gap-x-4'>
+        <Collapsible
+            open={open}
+            onOpenChange={setOpen}
+            className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'
+        >
+            <CollapsibleTrigger className='flex w-full items-center justify-between gap-x-4'>
                 <h2 className='flex items-center gap-x-2 text-2xl font-bold text-primary'>
                     <Lock className='size-6' />
                     Змінити пароль
                 </h2>
                 <Button
-                    onClick={() => setIsEditing(!isEditing)}
+                    onClick={() => setOpen(!open)}
                     size='icon'
                     variant='outline'
                 >
                     <Plus className='size-4' />
                 </Button>
+            </CollapsibleTrigger>
+            <div className='mt-3 border-t border-t-secondary pt-3'>
+                <CollapsibleContent>
+                    <ChangePasswordForm />
+                </CollapsibleContent>
             </div>
-            <div className='mt-3 flex items-center justify-between gap-x-4 border-t border-t-secondary pt-3'>
-                {isEditing ? <ChangePasswordForm /> : null}
-            </div>
-        </div>
+        </Collapsible>
     )
 }

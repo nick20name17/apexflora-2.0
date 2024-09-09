@@ -206,16 +206,13 @@ const CatalogueSheet = () => {
 
 const HeaderTop = () => {
     return (
-        <div className='container flex items-center justify-between gap-x-4 py-2 text-xs'>
-            <div className='flex items-center gap-x-2'>
+        <div className='container flex items-center justify-between gap-x-4 py-2 text-xs max-md:hidden'>
+            <div className='flex items-center gap-x-1'>
                 <span>З’явилися питання? Зв’яжіться з нами</span>
                 <PhoneDropdown className='text-xs text-foreground' />
             </div>
             <div className='flex items-center gap-x-2'>
-                <span>Ми у соц. мережах:</span>
                 <div className='flex items-center gap-x-4'>
-                    <span className='max-sm:hidden'>Ми у соц. мережах:</span>
-
                     <Link
                         className='flex items-center gap-x-1 transition-colors hover:text-primary'
                         to='https://www.facebook.com/apexflora.ua/'

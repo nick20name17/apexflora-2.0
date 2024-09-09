@@ -41,7 +41,7 @@ const SettingsSidebar = () => {
             </div>
 
             <nav className='px-4 py-6'>
-                <ul className='flex h-full min-h-[600px] flex-col gap-y-2'>
+                <ul className='flex h-full min-h-[580px] flex-col gap-y-2'>
                     <li
                         className={cn(
                             'cursor-pointer rounded-lg text-foreground transition-colors hover:bg-primary/10 hover:text-primary',

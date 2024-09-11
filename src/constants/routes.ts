@@ -11,7 +11,8 @@ export const routes = {
     favorites: '/favorites',
     loyaltyProgram: '/loyalty-program',
     balance: '/balance',
-    addvertisement: '/addvertisement'
+    addvertisement: '/addvertisement',
+    checkout: '/checkout'
 } as const
 
 export const publicRoutes = [

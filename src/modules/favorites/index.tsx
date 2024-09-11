@@ -24,6 +24,12 @@ import { cn } from '@/lib/utils'
 export const Favorites = () => {
     const [view, setView] = useState<View>('tiles')
 
+    const [openCardIndex, setOpenCardIndex] = useState<number | null>(null)
+
+    const handleToggle = (index: number) => {
+        setOpenCardIndex(openCardIndex === index ? null : index)
+    }
+
     return (
         <div className='w-full pt-4'>
             <Breadcrumb>
@@ -53,7 +59,7 @@ export const Favorites = () => {
             </div>
             <div className='border-t border-t-primary pt-4'>
                 <ScrollArea
-                    className='h-[calc(100vh-230px)] overflow-y-auto'
+                    className='h-[calc(100vh-240px)] overflow-y-auto'
                     id='products'
                 >
                     <ul
@@ -73,9 +79,17 @@ export const Favorites = () => {
                                         key={index}
                                     >
                                         {view === 'tiles' ? (
-                                            <ProductTileCard />
+                                            <ProductTileCard
+                                                key={index}
+                                                isOpen={openCardIndex === index}
+                                                onToggle={() => handleToggle(index)}
+                                            />
                                         ) : (
-                                            <ProductRowCard />
+                                            <ProductRowCard
+                                                key={index}
+                                                isOpen={openCardIndex === index}
+                                                onToggle={() => handleToggle(index)}
+                                            />
                                         )}
                                     </li>
                                 ))

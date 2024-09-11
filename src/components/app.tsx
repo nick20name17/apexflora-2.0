@@ -10,6 +10,7 @@ import {
     BalancePage,
     CartPage,
     CataloguePage,
+    CheckoutPage,
     ErrorPage,
     FavoritesPage,
     LoyaltyProgramPage,
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: routes.cart,
                 element: <CartPage />
+            },
+            {
+                path: routes.checkout,
+                element: <CheckoutPage />
             },
             {
                 path: routes.passwordReset,

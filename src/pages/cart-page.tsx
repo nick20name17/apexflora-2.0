@@ -1,3 +1,5 @@
+import { Cart } from '@/modules'
+
 export const CartPage = () => {
-    return <div>CartPage</div>
+    return <Cart />
 }

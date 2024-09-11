@@ -2,6 +2,7 @@ import { AddvertismentPage } from './addvertisment-page'
 import { BalancePage } from './balance-page'
 import { CartPage } from './cart-page'
 import { CataloguePage } from './catalogue-page'
+import { CheckoutPage } from './checkout-page'
 import { ErrorPage } from './error-page'
 import { FavoritesPage } from './favorites-page'
 import { LoyaltyProgramPage } from './loyalty-program-page'
@@ -18,6 +19,7 @@ export {
     BalancePage,
     CartPage,
     CataloguePage,
+    CheckoutPage,
     ErrorPage,
     FavoritesPage,
     LoyaltyProgramPage,

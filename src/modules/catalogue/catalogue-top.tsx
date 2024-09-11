@@ -7,9 +7,12 @@ import type { View } from '@/components/shared/view-tabs'
 import { Button } from '@/components/ui/button'
 import { animations } from '@/config/animations'
 
-export const CatalogueTop = () => {
-    const [view, setView] = useState<View>('tiles')
+interface CatalogueTopProps {
+    view: View
+    setView: React.Dispatch<React.SetStateAction<View>>
+}
 
+export const CatalogueTop = ({ view, setView }: CatalogueTopProps) => {
     return (
         <div
             className='flex items-center justify-between gap-x-2'

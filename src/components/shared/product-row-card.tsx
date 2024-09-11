@@ -10,8 +10,12 @@ import { ProductStatusesCards } from './product-statuses-cards'
 import { animations } from '@/config/animations'
 import { cn } from '@/lib/utils'
 
-export const ProductRowCard = () => {
-    const [open, setOpen] = useState(false)
+interface ProductRowCardProps {
+    isOpen: boolean
+    onToggle: () => void
+}
+
+export const ProductRowCard = ({ isOpen, onToggle }: ProductRowCardProps) => {
     const [isAddedToFavorites, setIsAddedToFavorites] = useState(false)
 
     const onAddingToFavorites = () => {
@@ -20,8 +24,8 @@ export const ProductRowCard = () => {
 
     return (
         <Collapsible
-            open={open}
-            onOpenChange={setOpen}
+            open={isOpen}
+            onOpenChange={onToggle}
             className='rounded-md border-2 border-secondary p-2 transition-colors data-[state=open]:border-primary data-[state=open]:bg-primary'
         >
             <motion.article
@@ -46,7 +50,7 @@ export const ProductRowCard = () => {
                         <h1
                             className={cn(
                                 'font-bold',
-                                open ? 'text-secondary' : 'text-primary'
+                                isOpen ? 'text-secondary' : 'text-primary'
                             )}
                         >
                             Аліум Нігрум
@@ -54,7 +58,7 @@ export const ProductRowCard = () => {
                         <span
                             className={cn(
                                 'text-sm',
-                                open ? 'text-secondary' : 'text-foreground/50'
+                                isOpen ? 'text-secondary' : 'text-foreground/50'
                             )}
                         >
                             🇨🇮 Gia Flowers
@@ -65,7 +69,7 @@ export const ProductRowCard = () => {
                 <div
                     className={cn(
                         'flex items-center justify-end gap-x-4',
-                        open ? 'text-secondary' : 'text-foreground/50'
+                        isOpen ? 'text-secondary' : 'text-foreground/50'
                     )}
                 >
                     <AnimatePresence
@@ -76,7 +80,7 @@ export const ProductRowCard = () => {
                             {...animations.popLayout}
                             className='flex flex-col'
                         >
-                            {open ? <span className='text-accent'>Колір</span> : null}
+                            {isOpen ? <span className='text-accent'>Колір</span> : null}
                             <span>Білий</span>
                         </motion.div>
 
@@ -84,24 +88,26 @@ export const ProductRowCard = () => {
                             {...animations.popLayout}
                             className='flex flex-col'
                         >
-                            {open ? <span className='text-accent'>Вагa/d ⌀</span> : null}
+                            {isOpen ? (
+                                <span className='text-accent'>Вагa/d ⌀</span>
+                            ) : null}
                             <span>50см</span>
                         </motion.div>
                         <motion.div
                             {...animations.popLayout}
                             className='flex flex-col'
                         >
-                            {open ? <span className='text-accent'>Якість</span> : null}
+                            {isOpen ? <span className='text-accent'>Якість</span> : null}
                             <span>А1</span>
                         </motion.div>
                         <motion.div
                             {...animations.popLayout}
                             className='flex flex-col'
                         >
-                            {open ? <span className='text-accent'>Вага</span> : null}
+                            {isOpen ? <span className='text-accent'>Вага</span> : null}
                             <span>13</span>
                         </motion.div>
-                        {open ? (
+                        {isOpen ? (
                             <motion.div
                                 {...animations.popLayout}
                                 className='flex flex-col'
@@ -110,7 +116,7 @@ export const ProductRowCard = () => {
                                 <span>13</span>
                             </motion.div>
                         ) : null}
-                        {open ? (
+                        {isOpen ? (
                             <motion.div
                                 {...animations.popLayout}
                                 className='flex flex-col'
@@ -131,14 +137,14 @@ export const ProductRowCard = () => {
                             {...animations.popLayout}
                             className={cn(
                                 'flex items-center gap-x-2',
-                                open ? 'text-accent' : 'text-foreground/60'
+                                isOpen ? 'text-accent' : 'text-foreground/60'
                             )}
                         >
                             <Ship className='size-6' />
                             <TimerIcon className='size-6' />
                             <Car className='size-6' />
                         </motion.div>
-                        {open ? null : (
+                        {isOpen ? null : (
                             <motion.span
                                 {...animations.popLayout}
                                 className='text-primary'
@@ -164,7 +170,7 @@ export const ProductRowCard = () => {
                             className='w-28'
                             variant='outline'
                         >
-                            {open ? 'Згорнути' : 'Детальніше'}
+                            {isOpen ? 'Згорнути' : 'Детальніше'}
                         </Button>
                     </CollapsibleTrigger>
                 </div>

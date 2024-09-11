@@ -1,4 +1,5 @@
 import { Loader2 } from 'lucide-react'
+import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -12,14 +13,30 @@ import {
 import { Input } from '@/components/ui/input'
 import { changePasswordSchema } from '@/config/validation-schemas'
 import { useCustomForm } from '@/hooks'
+import { usePasswordChangeMutation } from '@/store/api/passwords/passwords'
 
-export const ChangePasswordForm = () => {
+type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>
+
+interface ChangePasswordFormProps {
+    setOpen: (open: boolean) => void
+}
+
+export const ChangePasswordForm = ({ setOpen }: ChangePasswordFormProps) => {
     const form = useCustomForm(changePasswordSchema)
 
-    const isLoading = false
+    const [passwordChange, { isLoading }] = usePasswordChangeMutation()
 
-    const onSubmit = (values: any) => {
-        console.log(values)
+    const onSubmit = (values: ChangePasswordFormValues) => {
+        try {
+            passwordChange({
+                data: values,
+                id: 1
+            }).then(() => {
+                setOpen(false)
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

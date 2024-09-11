@@ -9,6 +9,8 @@ import { Toaster } from '@/components/ui/sonner'
 import { routes } from '@/constants/routes'
 import { cn } from '@/lib/utils'
 import { ErrorPage } from '@/pages'
+import { useAppDispatch } from '@/store/hooks/hooks'
+import { logout } from '@/store/slices/auth'
 
 export const SettingsLayout = () => (
     <>
@@ -29,6 +31,8 @@ export const SettingsLayout = () => (
 
 const SettingsSidebar = () => {
     const { pathname } = useLocation()
+
+    const dispatch = useAppDispatch()
 
     return (
         <aside className='min-w-72 bg-secondary max-lg:hidden'>
@@ -135,7 +139,10 @@ const SettingsSidebar = () => {
                         </NavLink>
                     </li>
 
-                    <li className='mt-auto cursor-pointer justify-self-end rounded-lg text-foreground transition-colors hover:bg-primary/10 hover:text-primary'>
+                    <li
+                        onClick={() => dispatch(logout())}
+                        className='mt-auto cursor-pointer justify-self-end rounded-lg text-foreground transition-colors hover:bg-primary/10 hover:text-primary'
+                    >
                         <button className='flex items-center gap-x-2 p-3'>
                             <LogOut className='size-5' />
                             Вийти

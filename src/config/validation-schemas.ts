@@ -77,7 +77,7 @@ export const signUpSchema = object({
     city: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим"),
-    phone: string({
+    phone_number: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
 })
@@ -92,16 +92,16 @@ export const userInfoSchema = object({
     }).min(1, "Це поле є обов'язковим"),
     position: string({
         required_error: "Це поле є обов'язковим"
-    }).min(1, "Це поле є обов'язковим"),
+    }),
     company: string({
         required_error: "Це поле є обов'язковим"
-    }).min(1, "Це поле є обов'язковим"),
-    phone: string({
+    }),
+    phone_number: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
 })
 
-export const ordersRecepientSchema = object({
+export const ordersCoworkerSchema = object({
     ...emailSchema.shape,
     first_name: string({
         required_error: "Це поле є обов'язковим"
@@ -109,7 +109,7 @@ export const ordersRecepientSchema = object({
     last_name: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим"),
-    phone: string({
+    phone_number: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
 })
@@ -118,7 +118,7 @@ export const ordersAddressSchema = object({
     city: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим"),
-    streeet: string({
+    street: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
 })
@@ -134,7 +134,7 @@ export const contactsSchema = object({
         .email({
             message: 'Введіть коректну електронну пошту'
         }),
-    phone: string({
+    phone_number: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим"),
     message: string({

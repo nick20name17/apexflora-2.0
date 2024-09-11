@@ -6,6 +6,8 @@ import { Logo } from '../logo'
 import { PhoneDropdown } from '@/components/shared'
 import { routes } from '@/constants/routes'
 import { cn } from '@/lib/utils'
+import { useAppSelector } from '@/store/hooks/hooks'
+import { selectIsAuth } from '@/store/slices/auth'
 
 export const Footer = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
     return (
@@ -29,29 +31,32 @@ export const Footer = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
 }
 
 const FooterLinks = () => {
+    const isAuth = useAppSelector(selectIsAuth)
     return (
         <div className='grid grid-cols-3 gap-6 text-background max-md:w-full max-md:border-t max-md:border-background max-md:py-5 max-xs:grid-cols-1'>
             <div>
                 <h3 className='sr-only font-bold'>Авторизація</h3>
-                <ul className='flex flex-col gap-y-2'>
-                    <li>
-                        <Link
-                            className='text-background transition-colors hover:text-accent'
-                            to={routes.signIn}
-                        >
-                            Вхід
-                        </Link>
-                    </li>
-                    <li>
-                        {' '}
-                        <Link
-                            className='text-background transition-colors hover:text-accent'
-                            to={routes.signUp}
-                        >
-                            Реєстрація
-                        </Link>
-                    </li>
-                </ul>
+                {isAuth ? null : (
+                    <ul className='flex flex-col gap-y-2'>
+                        <li>
+                            <Link
+                                className='text-background transition-colors hover:text-accent'
+                                to={routes.signIn}
+                            >
+                                Вхід
+                            </Link>
+                        </li>
+                        <li>
+                            {' '}
+                            <Link
+                                className='text-background transition-colors hover:text-accent'
+                                to={routes.signUp}
+                            >
+                                Реєстрація
+                            </Link>
+                        </li>
+                    </ul>
+                )}
             </div>
             <div>
                 <h3 className='font-bold'>Головна</h3>

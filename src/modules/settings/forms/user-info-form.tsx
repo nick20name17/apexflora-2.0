@@ -1,4 +1,5 @@
 import { Loader2 } from 'lucide-react'
+import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -12,14 +13,39 @@ import {
 import { Input } from '@/components/ui/input'
 import { userInfoSchema } from '@/config/validation-schemas'
 import { useCustomForm } from '@/hooks'
+import { usePatchUserMutation } from '@/store/api/users/users'
+import type { User } from '@/store/api/users/users.types'
 
-export const UserInfoForm = () => {
-    const form = useCustomForm(userInfoSchema)
+interface UserInfoFormProps {
+    user: User
+    setOpen: (open: boolean) => void
+}
 
-    const isLoading = false
+type UserInfoFormValues = z.infer<typeof userInfoSchema>
 
-    const onSubmit = (values: any) => {
-        console.log(values)
+export const UserInfoForm = ({ user, setOpen }: UserInfoFormProps) => {
+    const form = useCustomForm(userInfoSchema, {
+        company: user.company || '',
+        position: user.position || '',
+        first_name: user.first_name || '',
+        last_name: user.last_name || '',
+        email: user.email || '',
+        phone_number: user.phone_number || ''
+    })
+
+    const [patchUser, { isLoading }] = usePatchUserMutation()
+
+    const onSubmit = (formData: UserInfoFormValues) => {
+        try {
+            patchUser({
+                data: formData,
+                id: user.id
+            }).then(() => {
+                setOpen(false)
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -83,7 +109,7 @@ export const UserInfoForm = () => {
                 />
                 <FormField
                     control={form.control}
-                    name='phone'
+                    name='phone_number'
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Номер телефону</FormLabel>

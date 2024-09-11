@@ -1,7 +1,7 @@
-import { Edit, TrashIcon } from 'lucide-react'
+import { Edit, Loader2, TrashIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { OrdersRecepientForm } from '../forms/orders-recepient-form'
+import { OrdersCoworkerForm } from '../forms/orders-coworker-form'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -11,10 +11,17 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog'
+import { useRemoveCoworkerMutation } from '@/store/api/coworkers/coworkers'
+import type { Coworker } from '@/store/api/coworkers/coworkers.types'
 
-export const EditRecepientModal = () => {
+export const EditCoworkerModal = ({ coworker }: { coworker: Coworker }) => {
+    const [open, setOpen] = useState(false)
+
     return (
-        <Dialog>
+        <Dialog
+            open={open}
+            onOpenChange={setOpen}
+        >
             <DialogTrigger asChild>
                 <Button
                     size='icon'
@@ -27,17 +34,28 @@ export const EditRecepientModal = () => {
                 <DialogHeader>
                     <DialogTitle>Редагувати отримувача</DialogTitle>
                 </DialogHeader>
-                <OrdersRecepientForm />
+                <OrdersCoworkerForm
+                    setOpen={setOpen}
+                    coworker={coworker}
+                />
             </DialogContent>
         </Dialog>
     )
 }
 
-export const RemoveRecepientModal = () => {
+export const RemoveCoworkerModal = ({ coworker }: { coworker: Coworker }) => {
     const [open, setOpen] = useState(false)
 
+    const [removeCoworker, { isLoading }] = useRemoveCoworkerMutation()
+
     const onRemove = () => {
-        console.log('Remove')
+        try {
+            removeCoworker(coworker.id).then(() => {
+                setOpen(false)
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -59,13 +77,20 @@ export const RemoveRecepientModal = () => {
                 </DialogHeader>
                 <div className='ml-auto flex items-center gap-x-4'>
                     <Button
+                        className='w-24'
+                        disabled={isLoading}
                         onClick={onRemove}
                         size='sm'
                         variant='destructive'
                     >
-                        Видалити
+                        {isLoading ? (
+                            <Loader2 className='size-4 animate-spin' />
+                        ) : (
+                            'Видалити'
+                        )}
                     </Button>
                     <Button
+                        className='w-24'
                         onClick={() => setOpen(false)}
                         size='sm'
                         variant='outline'

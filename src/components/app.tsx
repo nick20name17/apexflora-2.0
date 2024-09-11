@@ -22,6 +22,7 @@ import {
     SignInPage,
     SignUpPage
 } from '@/pages'
+import { RequireAuthProvider } from '@/providers/require-auth-provider'
 
 const router = createBrowserRouter([
     {
@@ -36,11 +37,19 @@ const router = createBrowserRouter([
 
             {
                 path: routes.cart,
-                element: <CartPage />
+                element: (
+                    <RequireAuthProvider>
+                        <CartPage />
+                    </RequireAuthProvider>
+                )
             },
             {
                 path: routes.checkout,
-                element: <CheckoutPage />
+                element: (
+                    <RequireAuthProvider>
+                        <CheckoutPage />
+                    </RequireAuthProvider>
+                )
             },
             {
                 path: routes.passwordReset,
@@ -55,10 +64,13 @@ const router = createBrowserRouter([
     {
         path: routes.catalogue,
         element: (
-            <Layout
-                showFooter={false}
-                useContainer={false}
-            />
+            <RequireAuthProvider>
+                {' '}
+                <Layout
+                    showFooter={false}
+                    useContainer={false}
+                />
+            </RequireAuthProvider>
         ),
         errorElement: <ErrorPage />,
         children: [
@@ -85,7 +97,11 @@ const router = createBrowserRouter([
     },
     {
         path: routes.main,
-        element: <SettingsLayout />,
+        element: (
+            <RequireAuthProvider>
+                <SettingsLayout />
+            </RequireAuthProvider>
+        ),
         errorElement: <ErrorPage />,
         children: [
             {

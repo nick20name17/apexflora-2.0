@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ChangePasswordForm } from './forms/change-password-form'
-import { OrdersAddressForm } from './forms/order-address-form'
-import { OrdersRecepientForm } from './forms/orders-recepient-form'
+import { DeliverAddressForm } from './forms/deliver-address-form'
+import { OrdersCoworkerForm } from './forms/orders-coworker-form'
 import { UserInfoForm } from './forms/user-info-form'
 import { EditAddressModal, RemoveAddressModal } from './modals/address-modal'
-import { EditRecepientModal, RemoveRecepientModal } from './modals/recepient-modal'
+import { EditCoworkerModal, RemoveCoworkerModal } from './modals/coworker-modal'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -22,9 +22,18 @@ import {
     CollapsibleContent,
     CollapsibleTrigger
 } from '@/components/ui/collapsible'
+import { Skeleton } from '@/components/ui/skeleton'
 import { routes } from '@/constants/routes'
+import { useGetCoworkersQuery } from '@/store/api/coworkers/coworkers'
+import type { Coworker } from '@/store/api/coworkers/coworkers.types'
+import { useGetDeliverAddressQuery } from '@/store/api/deliver-address/deliver-address'
+import type { DeliverAddress } from '@/store/api/deliver-address/deliver-address.types'
+import { useAppSelector } from '@/store/hooks/hooks'
+import { selectUser } from '@/store/slices/auth'
 
 export const Settings = () => {
+    const userManager = useAppSelector(selectUser)?.service_manager
+
     return (
         <div className='w-full py-4'>
             <Breadcrumb>
@@ -49,7 +58,9 @@ export const Settings = () => {
                     <h2 className='sr-only'>Інформація про менеджера</h2>
                     <div className='flex flex-col'>
                         <span className='text-sm text-foreground/60'>Ваш менеджер</span>
-                        <span>Головний Адмін</span>
+                        <span>
+                            {userManager?.first_name + ' ' + userManager?.last_name}
+                        </span>
                     </div>
                     <div className='flex flex-col'>
                         <span className='text-sm text-foreground/60'>Номер телефону</span>
@@ -57,7 +68,7 @@ export const Settings = () => {
                             className='text-primary transition-colors hover:text-accent'
                             to='tel:+380679999569'
                         >
-                            <span>067 999 95 69</span>
+                            <span>{userManager?.phone_number}</span>
                         </Link>
                     </div>
                     <div className='flex flex-col'>
@@ -68,13 +79,13 @@ export const Settings = () => {
                             className='text-primary transition-colors hover:text-accent'
                             to='mailto:apexflora.ua@gmail.com'
                         >
-                            <span>admin@apexflora.com.ua</span>
+                            <span>{userManager?.email}</span>
                         </Link>
                     </div>
                 </div>
                 <UsersInfo />
-                <OrdersRecepients />
-                <OrdersAdresses />
+                <OrdersCoworkers />
+                <DeliverAddress />
                 <ChangePassword />
             </div>
         </div>
@@ -84,8 +95,14 @@ export const Settings = () => {
 const UsersInfo = () => {
     const [open, setOpen] = useState(false)
 
+    const user = useAppSelector(selectUser)!
+
     return (
-        <Collapsible className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
+        <Collapsible
+            open={open}
+            onOpenChange={setOpen}
+            className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'
+        >
             <CollapsibleTrigger className='flex w-full items-center justify-between gap-x-4'>
                 <h2 className='flex items-center gap-x-2 text-2xl font-bold text-primary'>
                     <User className='size-6' /> Інформація про користувача
@@ -101,7 +118,10 @@ const UsersInfo = () => {
             <div className='mt-3 border-t border-t-secondary pt-3'>
                 {open ? null : <UserInfo />}
                 <CollapsibleContent>
-                    <UserInfoForm />
+                    <UserInfoForm
+                        user={user}
+                        setOpen={setOpen}
+                    />
                 </CollapsibleContent>
             </div>
         </Collapsible>
@@ -109,15 +129,17 @@ const UsersInfo = () => {
 }
 
 const UserInfo = () => {
+    const user = useAppSelector(selectUser)
+
     return (
         <div className='flex w-full flex-wrap items-center justify-between gap-6 max-sm:flex-col max-sm:items-start'>
             <div className='flex flex-col'>
                 <span className='text-sm text-foreground/60'>Ім’я</span>
-                <span>Головний</span>
+                <span>{user?.first_name}</span>
             </div>
             <div className='flex flex-col'>
                 <span className='text-sm text-foreground/60'>Прізвище</span>
-                <span>Адмін</span>
+                <span>{user?.last_name}</span>
             </div>
             <div className='flex flex-col'>
                 <span className='text-sm text-foreground/60'>Номер телефону</span>
@@ -125,7 +147,7 @@ const UserInfo = () => {
                     className='text-primary transition-colors hover:text-accent'
                     to='tel:+380679999569'
                 >
-                    <span>067 999 95 69</span>
+                    <span>{user?.phone_number}</span>
                 </Link>
             </div>
             <div className='flex flex-col'>
@@ -134,21 +156,27 @@ const UserInfo = () => {
                     className='text-primary transition-colors hover:text-accent'
                     to='mailto:apexflora.ua@gmail.com'
                 >
-                    <span>admin@apexflora.com.ua</span>
+                    <span>{user?.email}</span>
                 </Link>
             </div>
             <div className='flex flex-col'>
                 <span className='text-sm text-foreground/60'>Компанія</span>
-                <span>Apexflora</span>
+                <span>{user?.company}</span>
             </div>
         </div>
     )
 }
 
-const OrdersRecepients = () => {
+const OrdersCoworkers = () => {
     const [open, setOpen] = useState(false)
 
-    const recepientLength = 1
+    const userId = useAppSelector(selectUser)?.id!
+
+    const { data, isLoading } = useGetCoworkersQuery({
+        creator: userId
+    })
+
+    const userCoworkers = data?.results || []
 
     return (
         <Collapsible
@@ -171,35 +199,46 @@ const OrdersRecepients = () => {
             <div className='mt-3 border-t border-t-secondary pt-3'>
                 {open ? null : (
                     <div className='flex w-full flex-col gap-y-4'>
-                        <OrdersRecepient />
+                        {isLoading ? (
+                            <>
+                                <Skeleton className='h-[44px] w-full rounded-md' />
+                            </>
+                        ) : (
+                            userCoworkers?.map((coworker) => (
+                                <OrdersCoworker
+                                    key={coworker.id}
+                                    coworker={coworker}
+                                />
+                            ))
+                        )}
                     </div>
                 )}
-                {recepientLength ? (
+                {userCoworkers?.length || isLoading ? (
                     ''
                 ) : (
-                    <span className='font-bold text-foreground/60'>
+                    <div className='h-[44px] font-bold text-foreground/60'>
                         Додайте отримувача замовлень
-                    </span>
+                    </div>
                 )}
                 <CollapsibleContent>
-                    <OrdersRecepientForm />
+                    <OrdersCoworkerForm setOpen={setOpen} />
                 </CollapsibleContent>
             </div>
         </Collapsible>
     )
 }
 
-const OrdersRecepient = () => {
+const OrdersCoworker = ({ coworker }: { coworker: Coworker }) => {
     return (
-        <div className='flex items-center justify-between gap-x-10 border-b border-b-secondary pb-3 last:border-none'>
+        <div className='flex items-center justify-between gap-x-10 border-b border-b-secondary pb-3 last:border-none last:pb-0'>
             <div className='flex items-center gap-x-10'>
                 <div className='flex flex-col'>
                     <span className='text-sm text-foreground/60'>Ім’я</span>
-                    <span>Головний</span>
+                    <span>{coworker.first_name}</span>
                 </div>
                 <div className='flex flex-col'>
                     <span className='text-sm text-foreground/60'>Прізвище</span>
-                    <span>Адмін</span>
+                    <span>{coworker.last_name}</span>
                 </div>
                 <div className='flex flex-col'>
                     <span className='text-sm text-foreground/60'>Номер телефону</span>
@@ -207,7 +246,7 @@ const OrdersRecepient = () => {
                         className='text-primary transition-colors hover:text-accent'
                         to='tel:+380679999569'
                     >
-                        <span>067 999 95 69</span>
+                        <span>{coworker.phone_number}</span>
                     </Link>
                 </div>
                 <div className='flex flex-col'>
@@ -216,25 +255,35 @@ const OrdersRecepient = () => {
                         className='text-primary transition-colors hover:text-accent'
                         to='mailto:apexflora.ua@gmail.com'
                     >
-                        <span>admin@apexflora.com.ua</span>
+                        <span>{coworker.email}</span>
                     </Link>
                 </div>
             </div>
             <div className='flex items-center gap-x-4'>
-                <EditRecepientModal />
-                <RemoveRecepientModal />
+                <EditCoworkerModal coworker={coworker} />
+                <RemoveCoworkerModal coworker={coworker} />
             </div>
         </div>
     )
 }
 
-const OrdersAdresses = () => {
+const DeliverAddress = () => {
     const [open, setOpen] = useState(false)
 
-    const recepientLength = 1
+    const userId = useAppSelector(selectUser)?.id!
+
+    const { data, isLoading } = useGetDeliverAddressQuery({
+        creator: userId
+    })
+
+    const deliverAddress = data?.results || []
 
     return (
-        <Collapsible className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'>
+        <Collapsible
+            open={open}
+            onOpenChange={setOpen}
+            className='rounded-md border border-secondary p-4 max-lg:flex-col-reverse max-lg:items-start'
+        >
             <CollapsibleTrigger className='flex w-full items-center justify-between gap-x-4'>
                 <h2 className='flex items-center gap-x-2 text-2xl font-bold text-primary'>
                     <MapPin className='size-6' /> Адреси доставки
@@ -248,39 +297,50 @@ const OrdersAdresses = () => {
                 </Button>
             </CollapsibleTrigger>
             <div className='mt-3 border-t border-t-secondary pt-3'>
-                {recepientLength ? (
+                {deliverAddress.length || isLoading ? (
                     ''
                 ) : (
-                    <span className='font-bold text-foreground/60'>
+                    <div className='h-[44px] font-bold text-foreground/60'>
                         Додайте адресу доставки
-                    </span>
+                    </div>
                 )}
 
                 {open ? null : (
                     <div className='flex w-full flex-col gap-y-4'>
-                        <OrdersAddress />
+                        {isLoading ? (
+                            <>
+                                <Skeleton className='h-[44px] w-full rounded-md' />
+                            </>
+                        ) : (
+                            deliverAddress?.map((deliverAddress) => (
+                                <OrdersAddress
+                                    key={deliverAddress.id}
+                                    deliverAddress={deliverAddress}
+                                />
+                            ))
+                        )}
                     </div>
                 )}
                 <CollapsibleContent>
-                    <OrdersAddressForm />
+                    <DeliverAddressForm setOpen={setOpen} />
                 </CollapsibleContent>
             </div>
         </Collapsible>
     )
 }
 
-const OrdersAddress = () => {
+const OrdersAddress = ({ deliverAddress }: { deliverAddress: DeliverAddress }) => {
     return (
-        <div className='flex items-center justify-between gap-x-10 border-b border-b-secondary pb-3 last:border-none'>
+        <div className='flex items-center justify-between gap-x-10 border-b border-b-secondary pb-3 last:border-none last:pb-0'>
             <div className='flex items-center gap-x-10'>
                 <div className='flex flex-col'>
                     <span className='text-sm text-foreground/60'>Адреса магазину</span>
-                    <span>Рівець, вул. Чорновола 24</span>
+                    <span>{deliverAddress.city + ', ' + deliverAddress.street}</span>
                 </div>
             </div>
             <div className='flex items-center gap-x-4'>
-                <EditAddressModal />
-                <RemoveAddressModal />
+                <EditAddressModal deliverAddress={deliverAddress} />
+                <RemoveAddressModal deliverAddress={deliverAddress} />
             </div>
         </div>
     )
@@ -310,7 +370,7 @@ const ChangePassword = () => {
             </CollapsibleTrigger>
             <div className='mt-3 border-t border-t-secondary pt-3'>
                 <CollapsibleContent>
-                    <ChangePasswordForm />
+                    <ChangePasswordForm setOpen={setOpen} />
                 </CollapsibleContent>
             </div>
         </Collapsible>

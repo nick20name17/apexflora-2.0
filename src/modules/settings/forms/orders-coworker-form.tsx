@@ -1,4 +1,5 @@
 import { Loader2 } from 'lucide-react'
+import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -10,16 +11,70 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ordersRecepientSchema } from '@/config/validation-schemas'
+import { ordersCoworkerSchema } from '@/config/validation-schemas'
 import { useCustomForm } from '@/hooks'
+import {
+    useAddCoworkerMutation,
+    usePatchCoworkerMutation
+} from '@/store/api/coworkers/coworkers'
+import type { Coworker } from '@/store/api/coworkers/coworkers.types'
+import { useAppSelector } from '@/store/hooks/hooks'
+import { selectUser } from '@/store/slices/auth'
 
-export const OrdersRecepientForm = () => {
-    const form = useCustomForm(ordersRecepientSchema)
+type OrdersCoworkerFormValues = z.infer<typeof ordersCoworkerSchema>
 
-    const isLoading = false
+interface OrdersCoworkerFormProps {
+    setOpen: (open: boolean) => void
+    coworker?: Coworker
+}
 
-    const onSubmit = (values: any) => {
-        console.log(values)
+export const OrdersCoworkerForm = ({ setOpen, coworker }: OrdersCoworkerFormProps) => {
+    const form = useCustomForm(ordersCoworkerSchema, {
+        first_name: coworker?.first_name || '',
+        last_name: coworker?.last_name || '',
+        email: coworker?.email || '',
+        phone_number: coworker?.phone_number || ''
+    })
+
+    const coworkerId = coworker?.id!
+
+    const userId = useAppSelector(selectUser)?.id!
+
+    const [addCoworker, { isLoading }] = useAddCoworkerMutation()
+    const [patchCoworker, { isLoading: isPatching }] = usePatchCoworkerMutation()
+
+    const handleAddCoworker = (data: OrdersCoworkerFormValues) => {
+        try {
+            addCoworker({
+                ...data,
+                creator: userId
+            }).then(() => {
+                setOpen(false)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handlePatchCoworker = (data: OrdersCoworkerFormValues) => {
+        try {
+            patchCoworker({
+                data,
+                id: coworkerId
+            }).then(() => {
+                setOpen(false)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const onSubmit = (formData: OrdersCoworkerFormValues) => {
+        if (coworkerId) {
+            handlePatchCoworker(formData)
+        } else {
+            handleAddCoworker(formData)
+        }
     }
 
     return (
@@ -83,7 +138,7 @@ export const OrdersRecepientForm = () => {
                 />
                 <FormField
                     control={form.control}
-                    name='phone'
+                    name='phone_number'
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Номер телефону</FormLabel>
@@ -103,10 +158,16 @@ export const OrdersRecepientForm = () => {
 
                 <Button
                     className='w-full'
-                    disabled={isLoading}
+                    disabled={isLoading || isPatching}
                     type='submit'
                 >
-                    {isLoading ? <Loader2 className='size-4 animate-spin' /> : 'Додати'}
+                    {isLoading || isPatching ? (
+                        <Loader2 className='size-4 animate-spin' />
+                    ) : coworkerId ? (
+                        'Змінити'
+                    ) : (
+                        'Додати'
+                    )}
                 </Button>
             </form>
         </Form>

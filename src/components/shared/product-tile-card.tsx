@@ -5,46 +5,51 @@ import { Skeleton } from '../ui/skeleton'
 
 import { ProductRowCard } from './product-row-card'
 import { animations } from '@/config/animations'
+import type { ShopProduct } from '@/store/api/shop-products/shop-products.types'
 
 interface ProductTileCardProps {
     isOpen: boolean
     onToggle: () => void
+    shopProduct: ShopProduct
 }
 
-export const ProductTileCard = ({ isOpen, onToggle }: ProductTileCardProps) => {
+export const ProductTileCard = ({
+    isOpen,
+    onToggle,
+    shopProduct
+}: ProductTileCardProps) => {
     return (
         <>
-            <motion.article
+            <article
                 onClick={onToggle}
-                {...animations.popLayout}
-                className='flex h-40 items-start rounded-md border border-foreground/25 max-md:h-auto max-md:flex-col'
+                className='flex h-40 items-start overflow-hidden rounded-md border border-foreground/25 max-md:h-auto max-md:flex-col'
             >
                 <div className='h-full w-32 max-md:h-52 max-md:w-full max-xs:h-60'>
-                    {false ? (
-                        <Skeleton className='h-full w-full rounded-none object-cover' />
-                    ) : (
+                    {shopProduct.image ? (
                         <img
                             className='h-full w-full object-cover'
-                            src={
-                                'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp'
-                            }
-                            alt='Агапантус Глетсєр'
+                            src={shopProduct.image}
+                            alt={shopProduct.product.name}
                         />
+                    ) : (
+                        <Skeleton className='h-full w-full rounded-none object-cover' />
                     )}
                 </div>
                 <div className='flex-1 p-3 max-md:w-full'>
                     <div className='flex items-start justify-between gap-x-2'>
                         <div>
-                            <h1 className='font-bold text-primary'>Агапантус Глетсєр</h1>
+                            <h1 className='font-bold text-primary'>
+                                {shopProduct.product.ukr_name}
+                            </h1>
                             <p className='mt-1 text-xs text-foreground/60'>
-                                Артикул: 114199
+                                Артикул: <span>{shopProduct.origin_id}</span>
                             </p>
                         </div>
                         <img
                             className='size-4'
-                            src='https://apex-flora.s3.amazonaws.com/static/flags/ke_16.png'
-                            alt='flag'
-                        ></img>
+                            src={shopProduct.producer.country.flag}
+                            alt={shopProduct.producer.country.name}
+                        />
                     </div>
                     <div className='mt-2 flex items-center justify-between gap-x-2 border-t border-t-primary pt-2 text-xs'>
                         <div className='flex flex-col gap-y-0.5'>
@@ -53,15 +58,17 @@ export const ProductTileCard = ({ isOpen, onToggle }: ProductTileCardProps) => {
                         </div>
                         <div className='flex flex-col gap-y-0.5'>
                             <span className='text-foreground/60'>Висота</span>
-                            <span className='text-primary'>70см</span>
+                            <span className='text-primary'>{shopProduct.height}см</span>
                         </div>
                         <div className='flex flex-col gap-y-0.5'>
                             <span className='text-foreground/60'>Якість</span>
-                            <span className='text-primary'>А1</span>
+                            <span className='text-primary'>{shopProduct.quality}</span>
                         </div>
                         <div className='flex flex-col gap-y-0.5'>
-                            <span className='text-foreground/60'>Вага</span>
-                            <span className='text-primary'>20</span>
+                            <span className='text-foreground/60'>Вагa/d ⌀</span>
+                            <span className='text-primary'>
+                                {shopProduct.weight_size}г
+                            </span>
                         </div>
                     </div>
                     <div className='mt-2 flex items-center justify-between gap-x-2 border-t border-t-primary pt-2'>
@@ -70,10 +77,10 @@ export const ProductTileCard = ({ isOpen, onToggle }: ProductTileCardProps) => {
                             <TimerIcon className='size-6' />
                             <Car className='size-6' />
                         </div>
-                        <span className='text-primary'>29 ₴</span>
+                        <span className='text-primary'>--- ₴</span>
                     </div>
                 </div>
-            </motion.article>
+            </article>
             <AnimatePresence mode='popLayout'>
                 {isOpen ? (
                     <motion.div
@@ -83,12 +90,26 @@ export const ProductTileCard = ({ isOpen, onToggle }: ProductTileCardProps) => {
                         <ProductRowCard
                             isOpen={isOpen}
                             onToggle={onToggle}
+                            shopProduct={shopProduct}
                         />
                     </motion.div>
-                ) : (
-                    ''
-                )}
+                ) : null}
             </AnimatePresence>
         </>
+    )
+}
+
+export const ProductTileCardSkeleton = () => {
+    return (
+        <div className='grid grid-cols-2 gap-4'>
+            {Array.from({ length: 10 }).map((_, index) => (
+                <div
+                    key={index}
+                    className='h-40 rounded-md'
+                >
+                    <Skeleton className='h-full w-full rounded-sm' />
+                </div>
+            ))}
+        </div>
     )
 }

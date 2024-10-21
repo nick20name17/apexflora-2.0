@@ -1,10 +1,26 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ProductTileCard } from '@/components/shared'
+import { ProductTileCardSkeleton } from '@/components/shared/product-tile-card'
 import { Button } from '@/components/ui/button'
 import { routes } from '@/constants/routes'
+import { useGetShopProductsQuery } from '@/store/api/shop-products/shop-products'
 
 export const Flowers = () => {
+    const { data: shopProdutcts, isLoading } = useGetShopProductsQuery({
+        promotion: true
+    })
+
+    const [openCardIndex, setOpenCardIndex] = useState<number | null>(null)
+
+    const handleToggle = (index: number) => {
+        setOpenCardIndex(openCardIndex === index ? null : index)
+    }
+
+    if (isLoading) {
+        return <ProductTileCardSkeleton />
+    }
     return (
         <section
             className='mt-8'
@@ -24,10 +40,14 @@ export const Flowers = () => {
             </div>
 
             <ul className='mt-5 grid grid-cols-3 gap-2 max-lg:grid-cols-2 max-xs:grid-cols-1'>
-                {Array.from({ length: 6 }).map((_, index) => (
-                    <li key={index}>
+                {shopProdutcts?.results?.map((shopProduct, index) => (
+                    <li key={shopProduct.id}>
                         <Link to={routes.catalogue}>
-                            <ProductTileCard />
+                            <ProductTileCard
+                                isOpen={openCardIndex === index}
+                                onToggle={() => handleToggle(index)}
+                                shopProduct={shopProduct}
+                            />
                         </Link>
                     </li>
                 ))}

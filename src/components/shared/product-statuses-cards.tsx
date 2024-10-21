@@ -8,9 +8,9 @@ import { cn } from '@/lib/utils'
 export const ProductStatusesCards = () => {
     return (
         <div className='grid grid-cols-3 gap-2 pt-4'>
-            <ProductStatusCard />
-            <ProductStatusCard />
-            <ProductStatusCard />
+            <ProductStatusCard key={1} />
+            <ProductStatusCard key={2} />
+            <ProductStatusCard key={3} />
         </div>
     )
 }

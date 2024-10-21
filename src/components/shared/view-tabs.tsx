@@ -1,18 +1,21 @@
 import { LayoutGrid, StretchHorizontal } from 'lucide-react'
+import { useEffect } from 'react'
+import { StringParam, useQueryParam } from 'use-query-params'
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export type View = 'tiles' | 'lines' | (string & {})
 
-interface ViewTabsProps {
-    view: View
-    setView: React.Dispatch<React.SetStateAction<View>>
-}
+export const ViewTabs = () => {
+    const [view = 'tiles', setView] = useQueryParam('view', StringParam)
 
-export const ViewTabs = ({ view, setView }: ViewTabsProps) => {
+    useEffect(() => {
+        setView(view)
+    }, [])
+
     return (
         <Tabs
-            defaultValue={view}
+            defaultValue={view!}
             onValueChange={setView}
         >
             <TabsList className='bg-secondary'>

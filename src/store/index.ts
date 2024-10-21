@@ -1,12 +1,16 @@
-import { type Store, configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
 import { api } from './api'
 import { listenerMiddleware } from './middleware/auth'
 import { authReducer } from './slices/auth'
+import { shopProductsReducer } from './slices/shop-products'
+import { catalogueSlice } from '@/modules/catalogue/store/catalogue'
 
-export const store: Store = configureStore({
+export const store = configureStore({
     reducer: {
         [api.reducerPath]: api.reducer,
+        catalogue: catalogueSlice.reducer,
+        shopProducts: shopProductsReducer,
         auth: authReducer
     },
     middleware: (getDefaultMiddleware) =>

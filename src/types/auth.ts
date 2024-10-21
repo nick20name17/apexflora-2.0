@@ -25,3 +25,7 @@ export interface RefreshResponse {
     data: AccessToken
     meta: FetchBaseQueryMeta
 }
+
+export interface AuthState extends LoginResponse {
+    isAuth: boolean
+}

@@ -9,7 +9,7 @@ interface DualSliderProps extends React.ComponentProps<typeof DualSlider> {
     min: number
     max: number
     value: number[]
-    setValue: React.Dispatch<React.SetStateAction<number[]>>
+    setValue: (value: number[]) => void
 }
 
 export const DualSliderWithInputs = ({
@@ -21,11 +21,10 @@ export const DualSliderWithInputs = ({
     className,
     step
 }: DualSliderProps) => {
-    const [minValue, setMinValue] = useState<string | number>(min)
-    const [maxValue, setMaxValue] = useState<string | number>(max)
+    const [minValue, setMinValue] = useState<string | number>(value[0])
+    const [maxValue, setMaxValue] = useState<string | number>(value[1])
 
     const handleValueChange = (newValues: number[]) => {
-        setValue(newValues)
         setMinValue(newValues[0])
         setMaxValue(newValues[1])
     }
@@ -34,12 +33,22 @@ export const DualSliderWithInputs = ({
         setValue([+minValue, +maxValue])
     }
 
+    const stepValue = minStepsBetweenThumbs ? minStepsBetweenThumbs * step : step
+
     const isMinValueValid = +minValue < min
     const isMaxValueValid = +maxValue > max
 
-    const isMinValueGreaterThanMaxValue = +minValue + minStepsBetweenThumbs > +maxValue
+    const isMinValueGreaterThanMaxValue = +minValue + stepValue > +maxValue
 
-    const isValid = isMinValueValid || isMaxValueValid || isMinValueGreaterThanMaxValue
+    const isMinValueDivisibleByStep = +minValue % step === 0
+    const isMaxValueDivisibleByStep = +maxValue % step === 0
+
+    const isValid =
+        isMinValueValid ||
+        isMaxValueValid ||
+        isMinValueGreaterThanMaxValue ||
+        !isMinValueDivisibleByStep ||
+        !isMaxValueDivisibleByStep
 
     return (
         <div className={cn(className)}>

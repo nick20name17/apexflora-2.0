@@ -1,5 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary'
 import { Outlet } from 'react-router-dom'
+import { QueryParamProvider } from 'use-query-params'
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 
 import { Footer } from './footer'
 import { Header } from './header'
@@ -24,7 +26,12 @@ export const Layout = ({
     const isAuth = useAppSelector((state) => state.auth.isAuth)
 
     return (
-        <>
+        <QueryParamProvider
+            adapter={ReactRouter6Adapter}
+            options={{
+                updateType: 'replaceIn'
+            }}
+        >
             <MetaHead />
             {showHeader ? isAuth ? <LoggedHeader /> : <Header /> : null}
             <main className={cn(useContainer ? 'container' : 'px-4')}>
@@ -34,6 +41,6 @@ export const Layout = ({
             </main>
             {showFooter ? <Footer className='mt-32' /> : null}
             <Toaster />
-        </>
+        </QueryParamProvider>
     )
 }

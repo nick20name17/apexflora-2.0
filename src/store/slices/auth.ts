@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { api } from '@/store/api'
-import type { LoginResponse } from '@/types/auth'
-
-interface AuthState extends LoginResponse {
-    isAuth: boolean
-}
+import type { AuthState } from '@/types/auth'
 
 const initialState: AuthState = {
     user: null,

@@ -101,7 +101,16 @@ export const api = createApi({
             providesTags: ['Users']
         })
     }),
-    tagTypes: ['Users', 'Coworkers', 'DeliverAddress']
+    tagTypes: [
+        'Users',
+        'Coworkers',
+        'DeliverAddress',
+        'ShopProducts',
+        'StatusProducts',
+        'Colors',
+        'Producers',
+        'Categories'
+    ]
 })
 
 export const {

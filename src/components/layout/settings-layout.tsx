@@ -1,6 +1,8 @@
 import { CarIcon, Heart, LogOut, PercentCircle, Settings, UserIcon } from 'lucide-react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { QueryParamProvider } from 'use-query-params'
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 
 import { Footer } from './footer'
 import { LoggedHeader } from './logged-header'
@@ -13,7 +15,12 @@ import { useAppDispatch } from '@/store/hooks/hooks'
 import { logout } from '@/store/slices/auth'
 
 export const SettingsLayout = () => (
-    <>
+    <QueryParamProvider
+        adapter={ReactRouter6Adapter}
+        options={{
+            updateType: 'replaceIn'
+        }}
+    >
         <MetaHead />
         <LoggedHeader />
         <main className='container'>
@@ -26,7 +33,7 @@ export const SettingsLayout = () => (
         </main>
         <Footer />
         <Toaster />
-    </>
+    </QueryParamProvider>
 )
 
 const SettingsSidebar = () => {

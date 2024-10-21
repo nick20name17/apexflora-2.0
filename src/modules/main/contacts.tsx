@@ -150,7 +150,7 @@ const ContactsForm = () => {
                     />
                     <FormField
                         control={form.control}
-                        name='phone'
+                        name='phone_number'
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Номер телефону</FormLabel>

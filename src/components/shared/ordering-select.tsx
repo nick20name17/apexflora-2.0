@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { StringParam, useQueryParam } from 'use-query-params'
 
 import {
     Select,
@@ -9,11 +10,15 @@ import {
 } from '@/components/ui/select'
 
 export const OrderingSelect = () => {
-    const [ordering, setOrdering] = useState('name')
+    const [ordering = 'name', setOrdering] = useQueryParam('ordering', StringParam)
+
+    useEffect(() => {
+        setOrdering(ordering)
+    }, [])
 
     return (
         <Select
-            defaultValue={ordering}
+            defaultValue={ordering!}
             onValueChange={setOrdering}
         >
             <SelectTrigger className='w-40'>

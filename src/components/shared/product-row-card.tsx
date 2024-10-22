@@ -67,7 +67,7 @@ export const ProductRowCard = ({
         >
             <article className='grid h-20 grid-cols-[2fr_2fr_1fr_1fr] gap-x-6'>
                 <div className='flex h-full items-center gap-x-2'>
-                    <div className='h-full w-28'>
+                    <div className='h-20 w-28'>
                         {shopProduct.image ? (
                             <img
                                 className='h-full w-full rounded-sm object-cover'
@@ -213,7 +213,7 @@ export const ProductRowCard = ({
                 </div>
             </article>
             <CollapsibleContent>
-                <ProductStatusesCards />
+                <ProductStatusesCards stockProducts={shopProduct.stocks} />
             </CollapsibleContent>
         </Collapsible>
     )

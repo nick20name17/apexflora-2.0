@@ -1,22 +1,19 @@
 import { api } from '..'
 
 import type {
-    ShopProductQueryParams,
-    ShopProductResponse,
-    ShopProductsAddData,
-    ShopProductsPatchData
-} from './shop-products.types'
+    OrdersAddData,
+    OrdersPatchData,
+    OrdersQueryParams,
+    OrdersResponse
+} from './orders.types'
 import { getQueryParamString } from '@/utils'
 
-export const shopProducts = api.injectEndpoints({
+export const orders = api.injectEndpoints({
     endpoints: (build) => ({
-        getShopProducts: build.query<
-            ShopProductResponse,
-            Partial<ShopProductQueryParams>
-        >({
+        getOrders: build.query<OrdersResponse, Partial<OrdersQueryParams>>({
             query: (params) => {
                 const queryString = getQueryParamString(params)
-                return `shop-products/?${queryString}`
+                return `orders/?${queryString}`
             },
             serializeQueryArgs: ({ queryArgs }) => {
                 const { offset, ...newQueryArgs } = queryArgs
@@ -37,38 +34,38 @@ export const shopProducts = api.injectEndpoints({
             forceRefetch({ currentArg, previousArg }) {
                 return currentArg?.offset !== previousArg?.offset
             },
-            providesTags: ['ShopProducts']
+            providesTags: ['Orders']
         }),
-        addShopProducts: build.mutation<void, Partial<ShopProductsAddData>>({
+        addOrders: build.mutation<void, Partial<OrdersAddData>>({
             query: (data) => ({
-                url: `shop-products/`,
+                url: `orders/`,
                 method: 'POST',
                 body: data
             }),
-            invalidatesTags: ['ShopProducts']
+            invalidatesTags: ['Orders']
         }),
-        patchShopProducts: build.mutation<void, ShopProductsPatchData>({
+        patchOrders: build.mutation<void, OrdersPatchData>({
             query: ({ data, id }) => ({
-                url: `shop-products/${id}/`,
+                url: `orders/${id}/`,
                 method: 'PATCH',
                 body: data
             }),
 
-            invalidatesTags: ['ShopProducts']
+            invalidatesTags: ['Orders']
         }),
-        removeShopProducts: build.mutation<void, number>({
+        removeOrders: build.mutation<void, number>({
             query: (id) => ({
-                url: `shop-products/${id}/`,
+                url: `orders/${id}/`,
                 method: 'DELETE'
             }),
-            invalidatesTags: ['ShopProducts']
+            invalidatesTags: ['Orders']
         })
     })
 })
 
 export const {
-    useGetShopProductsQuery,
-    useAddShopProductsMutation,
-    usePatchShopProductsMutation,
-    useRemoveShopProductsMutation
-} = shopProducts
+    useGetOrdersQuery,
+    useAddOrdersMutation,
+    usePatchOrdersMutation,
+    useRemoveOrdersMutation
+} = orders

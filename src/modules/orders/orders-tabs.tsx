@@ -1,15 +1,16 @@
-import { useState } from 'react'
-
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-export const OrdersTabs = () => {
-    const [status, setStatus] = useState('orders')
+interface OrdersTabsProps {
+    status: string
+    onStatusChange: (status: string) => void
+}
 
+export const OrdersTabs = ({ onStatusChange, status }: OrdersTabsProps) => {
     return (
         <Tabs
             className='w-full'
             defaultValue={status}
-            onValueChange={setStatus}
+            onValueChange={onStatusChange}
         >
             <TabsList className='h-12 w-full bg-secondary'>
                 <TabsTrigger

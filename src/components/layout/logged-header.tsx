@@ -16,8 +16,17 @@ import { PhoneDropdown, SearchBar } from '@/components/shared'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { routes } from '@/constants/routes'
+import { useGetBasketsQuery } from '@/store/api/baskets/baskets'
 
 export const LoggedHeader = () => {
+    const { data: baskets } = useGetBasketsQuery({
+        limit: 1000
+    })
+
+    const totalBasketPrice = baskets?.results.reduce((acc, item) => {
+        return acc + item.amount * +item.stock_product.retail_price
+    }, 0)
+
     return (
         <header className='bg-secondary'>
             <HeaderTop />
@@ -42,7 +51,7 @@ export const LoggedHeader = () => {
                             to={routes.cart}
                         >
                             <ShoppingBasket className='size-5' />
-                            293 ₴
+                            {totalBasketPrice || 0} ₴
                         </Link>
                         <Link
                             className='flex items-center gap-x-2 transition-colors hover:text-accent'

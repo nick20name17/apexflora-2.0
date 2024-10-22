@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BooleanParam, StringParam, useQueryParam } from 'use-query-params'
 
 import { CatalogueProducts } from './catalogue-products'
@@ -6,6 +6,7 @@ import { CatalogueTop } from './catalogue-top'
 import { FiltersSidebar } from './filters-sidebar'
 import { StatusTabs } from './status-tabs'
 import { setCurrentQueryParams } from './store/catalogue'
+import { tableConfig } from '@/config/table'
 import { useBodyScrollLock } from '@/hooks'
 import { useGetShopProductsQuery } from '@/store/api/shop-products/shop-products'
 import { useAppDispatch } from '@/store/hooks/hooks'
@@ -25,9 +26,11 @@ export const Catalogue = () => {
     const [categories] = useQueryParam('categories', StringParam)
     const [countries] = useQueryParam('countries', StringParam)
 
+    const [offset, setOffset] = useState(0)
+
     const queryParams = {
-        limit: 10,
-        offset: 0,
+        limit: tableConfig.pagination.pageSize,
+        offset,
         statuses: status!,
         ordering: ordering!,
         price: price!,
@@ -58,8 +61,11 @@ export const Catalogue = () => {
                 />
                 <StatusTabs />
                 <CatalogueProducts
+                    offset={offset}
+                    setOffset={setOffset}
                     shopProducts={data}
-                    isDataRetriving={isLoading}
+                    isDataFetching={isFetching}
+                    isDataLoading={isLoading}
                 />
             </div>
         </div>

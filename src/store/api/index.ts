@@ -109,7 +109,9 @@ export const api = createApi({
         'StatusProducts',
         'Colors',
         'Producers',
-        'Categories'
+        'Categories',
+        'Orders',
+        'Basket'
     ]
 })
 

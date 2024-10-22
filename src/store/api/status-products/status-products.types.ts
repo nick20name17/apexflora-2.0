@@ -2,8 +2,8 @@ import type { BaseQueryParams, Response } from '@/types/api'
 
 type StatusProductName = 'delivering' | 'available' | 'pre_order'
 
-interface StatusProductData {
-    id: 0
+export interface StatusProductData {
+    id: number
     name: StatusProductName
 }
 

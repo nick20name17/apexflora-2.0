@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { StringParam, useQueryParam } from 'use-query-params'
 
@@ -12,16 +13,19 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { tableConfig } from '@/config/table'
 import { routes } from '@/constants/routes'
 import { useGetShopProductsQuery } from '@/store/api/shop-products/shop-products'
 
 export const Favorites = () => {
     const [ordering] = useQueryParam('ordering', StringParam)
 
+    const [offset, setOffset] = useState(0)
+
     const { data, isLoading, isFetching } = useGetShopProductsQuery({
-        limit: 10,
-        offset: 0,
-        in_wish_list: 'true',
+        limit: tableConfig.pagination.pageSize,
+        offset,
+        in_wish_list: true,
         ordering: ordering!
     })
 
@@ -51,7 +55,10 @@ export const Favorites = () => {
             </div>
             <div className='relative border-t border-t-primary pt-4'>
                 <CatalogueProducts
-                    isDataRetriving={isFetching || isLoading}
+                    isDataFetching={isFetching}
+                    isDataLoading={isLoading}
+                    offset={offset}
+                    setOffset={setOffset}
                     shopProducts={data}
                 />
             </div>

@@ -115,7 +115,7 @@ export interface ShopProductQueryParams extends BaseQueryParams {
     categories: string
     statuses: string
     countries: string
-    in_wish_list: string
+    in_wish_list: boolean
     colors: string
     multicolor: string
     has_discounts: boolean

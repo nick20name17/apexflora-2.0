@@ -365,7 +365,7 @@ const ChangePassword = () => {
                     size='icon'
                     variant='outline'
                 >
-                    <Plus className='size-4' />
+                    <Edit className='size-4' />
                 </Button>
             </CollapsibleTrigger>
             <div className='mt-3 border-t border-t-secondary pt-3'>

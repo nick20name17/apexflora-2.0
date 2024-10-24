@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { type infer as zodInfer } from 'zod'
 
 import { Button } from '@/components/ui/button'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog'
 import {
     Form,
     FormControl,
@@ -11,8 +19,10 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { contactsSchema } from '@/config/validation-schemas'
 import { useCustomForm } from '@/hooks'
+import { useAddContactMutation } from '@/store/api/contacts/contacts'
 
 export const Contacts = () => {
     return (
@@ -91,10 +101,29 @@ export const Contacts = () => {
 type ContactFormData = zodInfer<typeof contactsSchema>
 
 const ContactsForm = () => {
+    const [openModal, setOpenModal] = useState(false)
+
     const form = useCustomForm(contactsSchema)
 
-    const onSubmit = (values: ContactFormData) => {
-        console.log(values)
+    const [addContact] = useAddContactMutation()
+
+    const handleAddContact = (data: ContactFormData) => {
+        try {
+            addContact({
+                name: data.name,
+                email: data.email,
+                phone_number: data.phone_number,
+                text: data.message || ''
+            }).then(() => {
+                setOpenModal(true)
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const onSubmit = (formData: ContactFormData) => {
+        handleAddContact(formData)
     }
 
     return (
@@ -139,6 +168,7 @@ const ContactsForm = () => {
                                 <FormControl>
                                     <Input
                                         inputMode='email'
+                                        type='email'
                                         placeholder='stepanenko@gmail.com'
                                         {...field}
                                     />
@@ -174,8 +204,8 @@ const ContactsForm = () => {
                             <FormItem>
                                 <FormLabel>Текстове повідомлення</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder='38 067 999 95 69'
+                                    <Textarea
+                                        placeholder='Текстове повідомлення'
                                         {...field}
                                     />
                                 </FormControl>
@@ -192,6 +222,24 @@ const ContactsForm = () => {
                     </Button>
                 </form>
             </Form>
+            {openModal ? <AddedContactModal initialOpen={openModal} /> : null}
         </div>
+    )
+}
+
+const AddedContactModal = ({ initialOpen }: { initialOpen: boolean }) => {
+    const [open, setOpen] = useState(initialOpen)
+    return (
+        <Dialog
+            open={open}
+            onOpenChange={setOpen}
+        >
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Дякуємо за заявку!</DialogTitle>
+                    <DialogDescription>Наш менеджер зв’яжеться з вами</DialogDescription>
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
     )
 }

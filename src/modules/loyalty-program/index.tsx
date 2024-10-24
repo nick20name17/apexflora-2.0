@@ -69,8 +69,8 @@ export const LoyaltyProgram = () => {
                             </h2>
                             <p className='mt-1 text-foreground/60'>
                                 1% при купівлі на суму від 10 000 ₴. <br />
-                                2% при купівлі на суму від 20 000 ₴. <br />
-                                3% при купівлі на суму від 30 000 ₴
+                                2% при купівлі на суму від 25 000 ₴. <br />
+                                3% при купівлі на суму від 40 000 ₴
                             </p>
                         </div>
                         <div className='flex items-center gap-x-2'>

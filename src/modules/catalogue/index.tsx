@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { BooleanParam, StringParam, useQueryParam } from 'use-query-params'
 
 import { CatalogueProducts } from './catalogue-products'
 import { CatalogueTop } from './catalogue-top'
 import { FiltersSidebar } from './filters-sidebar'
+import { OrderedModal } from './ordered-modal'
 import { StatusTabs } from './status-tabs'
 import { setCurrentQueryParams } from './store/catalogue'
 import { tableConfig } from '@/config/table'
@@ -17,6 +19,10 @@ export interface ActiveFilter {
 }
 
 export const Catalogue = () => {
+    const location = useLocation()
+
+    const isOrdered = location.state?.isOrdered
+
     const [status] = useQueryParam('status', StringParam)
     const [ordering] = useQueryParam('ordering', StringParam)
     const [promo] = useQueryParam('promo', BooleanParam)
@@ -50,7 +56,6 @@ export const Catalogue = () => {
     }, [queryParams])
 
     useBodyScrollLock()
-
     return (
         <div className='flex items-start gap-x-4'>
             <FiltersSidebar />
@@ -68,6 +73,7 @@ export const Catalogue = () => {
                     isDataLoading={isLoading}
                 />
             </div>
+            {isOrdered ? <OrderedModal initialOpen={isOrdered} /> : null}
         </div>
     )
 }

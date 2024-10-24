@@ -3,18 +3,15 @@ import {
     Heart,
     Instagram,
     LetterText,
-    Menu,
     ShoppingBasket,
     UserIcon
 } from 'lucide-react'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Logo } from '../logo'
+import { CatalogueSheet } from '../shared/catalogue-sheet'
 
 import { PhoneDropdown, SearchBar } from '@/components/shared'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { routes } from '@/constants/routes'
 import { useGetBasketsQuery } from '@/store/api/baskets/baskets'
 
@@ -64,152 +61,6 @@ export const LoggedHeader = () => {
                 </div>
             </div>
         </header>
-    )
-}
-
-const CatalogueSheet = () => {
-    const [open, setOpen] = useState(false)
-
-    return (
-        <Sheet
-            open={open}
-            onOpenChange={setOpen}
-        >
-            <SheetTrigger asChild>
-                <Button variant='secondary'>
-                    <Menu className='mr-2 size-4 max-sm:mr-0' />
-                    <span className='max-sm:hidden'>Каталог</span>
-                </Button>
-            </SheetTrigger>
-            <SheetContent
-                className='grid grid-cols-2 gap-4 pt-12 max-md:grid-cols-1'
-                side='top'
-            >
-                <SheetTitle className='sr-only'>Каталог</SheetTitle>
-                <div className=''>
-                    <h3 className='border-b border-primary pb-3 text-[28px] text-primary'>
-                        Квіти
-                    </h3>
-                    <ul className='mt-5 grid grid-cols-4 gap-4 text-foreground/50 max-lg:grid-cols-3 max-sm:grid-cols-2 max-sm:gap-3'>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Троянди</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>{' '}
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Темно-білий квіт</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Світло-білий квіт</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Троянди</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>{' '}
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Темно-білий квіт</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Світло-білий квіт</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 className='border-b border-primary pb-3 text-[28px] text-primary'>
-                        Флористична фурнітура
-                    </h3>
-                    <ul className='mt-5 grid grid-cols-4 gap-4 text-foreground/50 max-lg:grid-cols-3 max-sm:grid-cols-2 max-sm:gap-3'>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Троянди</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>{' '}
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Темно-білий квіт</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Світло-білий квіт</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Троянди</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>
-                        <li
-                            className='transition-colors hover:text-primary'
-                            onClick={() => setOpen(false)}
-                        >
-                            <Link to={routes.catalogue}>Листові квіти</Link>
-                        </li>
-                    </ul>
-                </div>
-            </SheetContent>
-        </Sheet>
     )
 }
 

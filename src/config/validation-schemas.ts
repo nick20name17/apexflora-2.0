@@ -46,7 +46,7 @@ export const changePasswordSchema = object({
         ),
     ...newPasswordSchema.shape
 }).refine((data) => data.new_password1 === data.new_password2, {
-    message: 'Паролі н',
+    message: 'Паролі не співпадають',
     path: ['new_password2']
 })
 
@@ -140,4 +140,19 @@ export const contactsSchema = object({
     message: string({
         required_error: 'Це поле є рядковим'
     }).optional()
+})
+
+export const addOrderSchema = object({
+    username: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    phone_number: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    address: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    recepient: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим")
 })

@@ -1,4 +1,12 @@
-import { CarIcon, Heart, LogOut, PercentCircle, Settings, UserIcon } from 'lucide-react'
+import {
+    CarIcon,
+    Heart,
+    LayoutDashboard,
+    LogOut,
+    PercentCircle,
+    Settings,
+    UserIcon
+} from 'lucide-react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { QueryParamProvider } from 'use-query-params'
@@ -8,7 +16,8 @@ import { Footer } from './footer'
 import { LoggedHeader } from './logged-header'
 import { MetaHead } from '@/components/meta-head'
 import { Toaster } from '@/components/ui/sonner'
-import { routes } from '@/constants/routes'
+import { adminRoutes, routes } from '@/constants/routes'
+import { useCurrentUserRole } from '@/hooks/use-current-user-role'
 import { cn } from '@/lib/utils'
 import { ErrorPage } from '@/pages'
 import { useAppDispatch } from '@/store/hooks/hooks'
@@ -26,7 +35,7 @@ export const SettingsLayout = () => (
         <main className='container'>
             <div className='flex items-start gap-x-6'>
                 <SettingsSidebar />
-                <ErrorBoundary fallback={<ErrorPage message='Something went wrong' />}>
+                <ErrorBoundary fallback={<ErrorPage message='Щось пішло не так' />}>
                     <Outlet />
                 </ErrorBoundary>
             </div>
@@ -37,6 +46,8 @@ export const SettingsLayout = () => (
 )
 
 const SettingsSidebar = () => {
+    const isUser = useCurrentUserRole('user')
+
     const { pathname } = useLocation()
 
     const dispatch = useAppDispatch()
@@ -53,6 +64,24 @@ const SettingsSidebar = () => {
 
             <nav className='px-4 py-6'>
                 <ul className='flex h-full min-h-[580px] flex-col gap-y-2'>
+                    {isUser ? null : (
+                        <li
+                            className={cn(
+                                'cursor-pointer rounded-lg text-foreground transition-colors hover:bg-primary/10 hover:text-primary',
+                                pathname === adminRoutes.colors
+                                    ? 'bg-primary text-background'
+                                    : ''
+                            )}
+                        >
+                            <NavLink
+                                className='flex items-center gap-x-2 p-3'
+                                to={adminRoutes.colors}
+                            >
+                                <LayoutDashboard className='size-5' />
+                                Адмін
+                            </NavLink>
+                        </li>
+                    )}
                     <li
                         className={cn(
                             'cursor-pointer rounded-lg text-foreground transition-colors hover:bg-primary/10 hover:text-primary',

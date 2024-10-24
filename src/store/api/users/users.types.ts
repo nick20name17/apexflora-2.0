@@ -2,6 +2,7 @@ import type { Coworker } from '../coworkers/coworkers.types'
 
 import type { PatchData, Response } from '@/types/api'
 
+export type Roles = 'admin' | 'manager' | 'user'
 export interface User {
     id: number
     email: string
@@ -10,7 +11,7 @@ export interface User {
     phone_number: string
     company: string
     position: string
-    role: string
+    role: Roles
     city: string
     service_manager: ServiceManager
     is_active: boolean

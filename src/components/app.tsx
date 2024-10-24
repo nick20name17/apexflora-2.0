@@ -1,10 +1,11 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import { AdminLayout } from './layout/admin-layout'
 import { AuthLayout } from './layout/auth-layout'
 import { SettingsLayout } from './layout/settings-layout'
 import '@/assets/styles/global.css'
 import { Layout } from '@/components/layout/layout'
-import { routes } from '@/constants/routes'
+import { adminRoutes, routes } from '@/constants/routes'
 import {
     AddvertismentPage,
     BalancePage,
@@ -22,6 +23,7 @@ import {
     SignInPage,
     SignUpPage
 } from '@/pages'
+import { ColorsPage } from '@/pages/admin/colors-page'
 import { RequireAuthProvider } from '@/providers/require-auth-provider'
 
 const router = createBrowserRouter([
@@ -127,6 +129,21 @@ const router = createBrowserRouter([
             {
                 path: routes.addvertisement,
                 element: <AddvertismentPage />
+            }
+        ]
+    },
+    {
+        path: adminRoutes.admin,
+        element: (
+            <RequireAuthProvider>
+                <AdminLayout />
+            </RequireAuthProvider>
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: adminRoutes.colors,
+                element: <ColorsPage />
             }
         ]
     },

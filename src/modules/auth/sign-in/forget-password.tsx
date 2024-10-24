@@ -56,7 +56,7 @@ export const ForgetPassword = () => {
             handleClose()
         } catch (error) {
             const isErrorMessage = isErrorWithMessage(error)
-            errorToast(isErrorMessage ? error.data.detail : 'Something went wrong')
+            errorToast(isErrorMessage ? error.data.detail : 'Щось пішло не так')
         }
     }
 

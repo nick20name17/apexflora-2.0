@@ -15,6 +15,22 @@ export const routes = {
     checkout: '/checkout'
 } as const
 
+export const adminRoutes = {
+    admin: '/admin',
+    colors: '/admin/colors',
+    bonusLimits: '/admin/bonus-limits',
+    bonusPrograms: '/admin/bonus-programs',
+    users: '/admin/users',
+    archive: '/admin/archive',
+    orders: '/admin/orders',
+    registrationRequests: '/admin/registration-requests',
+    contacts: '/admin/contacts',
+    categories: '/admin/categories',
+    producers: '/admin/producers',
+    discounts: '/admin/discounts',
+    products: '/admin/products'
+}
+
 export const publicRoutes = [
     routes.main,
     routes.signIn,

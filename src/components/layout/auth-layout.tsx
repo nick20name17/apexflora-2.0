@@ -22,7 +22,7 @@ export const AuthLayout = () => {
         <>
             <MetaHead />
             <main>
-                <ErrorBoundary fallback={<ErrorPage message='Something went wrong' />}>
+                <ErrorBoundary fallback={<ErrorPage message='Щось пішло не так' />}>
                     <Outlet />
                 </ErrorBoundary>
             </main>

@@ -35,7 +35,7 @@ export const Layout = ({
             <MetaHead />
             {showHeader ? isAuth ? <LoggedHeader /> : <Header /> : null}
             <main className={cn(useContainer ? 'container' : 'px-4')}>
-                <ErrorBoundary fallback={<ErrorPage message='Something went wrong' />}>
+                <ErrorBoundary fallback={<ErrorPage message='Щось пішло не так' />}>
                     <Outlet />
                 </ErrorBoundary>
             </main>

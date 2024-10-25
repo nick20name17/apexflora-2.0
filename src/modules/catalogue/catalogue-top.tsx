@@ -47,7 +47,7 @@ export const CatalogueTop = ({
 }
 
 const AppliedFilters = () => {
-    const { data: allColors } = useGetAllColorsQuery()
+    const { data: allColors } = useGetAllColorsQuery({})
     const { data: allProducers } = useGetAllProducersQuery()
     const { data: allCategories } = useGetAllCategoriesQuery({
         only_parent: true
@@ -124,8 +124,9 @@ const AppliedFilters = () => {
         }
 
         if (value) {
-            const currentValue = setterMap[key](null)
-            const newValues = currentValue?.split(',').filter((v) => v !== value) || []
+            const currentValue = setterMap[key](null) as any
+            const newValues =
+                currentValue?.split(',').filter((v: any) => v !== value) || []
             setterMap[key](newValues.length > 0 ? newValues.join(',') : null)
         } else {
             setterMap[key](null)

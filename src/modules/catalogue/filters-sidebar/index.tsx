@@ -21,7 +21,7 @@ import type { Country } from '@/store/api/producers/producers.types'
 import { useAppDispatch } from '@/store/hooks/hooks'
 
 export const FiltersSidebar = () => {
-    const { data: colors } = useGetAllColorsQuery()
+    const { data: colors } = useGetAllColorsQuery({})
     const { data: producers } = useGetAllProducersQuery()
     const { data: categories } = useGetAllCategoriesQuery({
         only_parent: true

@@ -13,7 +13,7 @@ import {
     UserPlus,
     Users
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { Logo } from '../logo'
 import { Avatar, AvatarFallback } from '../ui/avatar'
@@ -41,6 +41,8 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks'
 import { logout, selectUser } from '@/store/slices/auth'
 
 export const AdminSidebar = () => {
+    const location = useLocation()
+
     const user = useAppSelector(selectUser)
 
     const dispatch = useAppDispatch()
@@ -67,7 +69,12 @@ export const AdminSidebar = () => {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={
+                                        location.pathname === adminRoutes.bonuseLimits
+                                    }
+                                    asChild
+                                >
                                     <Link to={adminRoutes.bonuseLimits}>
                                         <Infinity />
                                         <span>Бонусні ліміти</span>
@@ -75,7 +82,12 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={
+                                        location.pathname === adminRoutes.bonusePrograms
+                                    }
+                                    asChild
+                                >
                                     <Link to={adminRoutes.bonusePrograms}>
                                         <Percent />
                                         <span>Бонусні програми</span>
@@ -93,7 +105,10 @@ export const AdminSidebar = () => {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.archive}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.archive}>
                                         <UserMinus />
                                         <span>Архів</span>
@@ -101,7 +116,10 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.contacts}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.contacts}>
                                         <Contact />
                                         <span>Зворотній звязок</span>
@@ -109,7 +127,13 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={
+                                        location.pathname ===
+                                        adminRoutes.registrationRequests
+                                    }
+                                    asChild
+                                >
                                     <Link to={adminRoutes.registrationRequests}>
                                         <UserPlus />
                                         <span>Запити на реєстрацію</span>
@@ -117,7 +141,10 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.users}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.users}>
                                         <Users />
                                         <span>Список користувачів</span>
@@ -135,7 +162,10 @@ export const AdminSidebar = () => {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.products}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.products}>
                                         <Flower />
                                         <span>Товари</span>
@@ -143,7 +173,12 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={
+                                        location.pathname === adminRoutes.categories
+                                    }
+                                    asChild
+                                >
                                     <Link to={adminRoutes.categories}>
                                         <ChartBarStacked />
                                         <span>Категорії</span>
@@ -151,7 +186,10 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.colors}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.colors}>
                                         <Palette />
                                         <span>Кольори</span>
@@ -159,7 +197,10 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.producers}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.producers}>
                                         <UserPlus />
                                         <span>Виробники</span>
@@ -167,7 +208,10 @@ export const AdminSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.discounts}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.discounts}>
                                         <TicketPercent />
                                         <span>Знижки</span>
@@ -185,7 +229,10 @@ export const AdminSidebar = () => {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild>
+                                <SidebarMenuButton
+                                    isActive={location.pathname === adminRoutes.orders}
+                                    asChild
+                                >
                                     <Link to={adminRoutes.orders}>
                                         <Flower2 />
                                         <span>Замовлення</span>

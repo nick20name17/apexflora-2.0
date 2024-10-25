@@ -11,11 +11,14 @@ import { getQueryParamString } from '@/utils'
 
 export const colors = api.injectEndpoints({
     endpoints: (build) => ({
-        getAllColors: build.query<ColorsData[], void>({
-            query: () => 'colors/all/',
+        getAllColors: build.query<ColorsData[], Partial<ColorsQueryParams>>({
+            query: (queryParams) => {
+                const queryString = getQueryParamString(queryParams)
+                return `colors/all?${queryString}`
+            },
             providesTags: ['Colors']
         }),
-        getResponseColors: build.query<ColorsResponse, ColorsQueryParams>({
+        getResponseColors: build.query<ColorsResponse, Partial<ColorsQueryParams>>({
             query: (queryParams) => {
                 const queryString = getQueryParamString(queryParams)
                 return `colors?${queryString}`

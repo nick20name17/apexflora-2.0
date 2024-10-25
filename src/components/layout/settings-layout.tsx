@@ -15,7 +15,6 @@ import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6'
 import { Footer } from './footer'
 import { LoggedHeader } from './logged-header'
 import { MetaHead } from '@/components/meta-head'
-import { Toaster } from '@/components/ui/sonner'
 import { adminRoutes, routes } from '@/constants/routes'
 import { useCurrentUserRole } from '@/hooks/use-current-user-role'
 import { cn } from '@/lib/utils'
@@ -41,7 +40,6 @@ export const SettingsLayout = () => (
             </div>
         </main>
         <Footer />
-        <Toaster />
     </QueryParamProvider>
 )
 

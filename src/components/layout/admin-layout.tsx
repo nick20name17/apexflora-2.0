@@ -30,7 +30,7 @@ export const AdminLayout = () => {
                 </main>
             </SidebarProvider>
 
-            <Toaster />
+            <Toaster richColors />
         </QueryParamProvider>
     )
 }

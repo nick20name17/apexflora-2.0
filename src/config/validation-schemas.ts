@@ -156,3 +156,12 @@ export const addOrderSchema = object({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
 })
+
+export const colorSchema = object({
+    name: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    hex: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим")
+})

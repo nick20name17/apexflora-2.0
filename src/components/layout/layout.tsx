@@ -7,7 +7,6 @@ import { Footer } from './footer'
 import { Header } from './header'
 import { LoggedHeader } from './logged-header'
 import { MetaHead } from '@/components/meta-head'
-import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
 import { ErrorPage } from '@/pages'
 import { useAppSelector } from '@/store/hooks/hooks'
@@ -40,7 +39,6 @@ export const Layout = ({
                 </ErrorBoundary>
             </main>
             {showFooter ? <Footer className='mt-32' /> : null}
-            <Toaster />
         </QueryParamProvider>
     )
 }

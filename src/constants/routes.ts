@@ -18,8 +18,8 @@ export const routes = {
 export const adminRoutes = {
     admin: '/admin',
     colors: '/admin/colors',
-    bonusLimits: '/admin/bonus-limits',
-    bonusPrograms: '/admin/bonus-programs',
+    bonuseLimits: '/admin/bonuse-limits',
+    bonusePrograms: '/admin/bonuse-programs',
     users: '/admin/users',
     archive: '/admin/archive',
     orders: '/admin/orders',

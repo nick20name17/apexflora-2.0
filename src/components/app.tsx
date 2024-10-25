@@ -24,6 +24,7 @@ import {
     SignUpPage
 } from '@/pages'
 import { ColorsPage } from '@/pages/admin/colors-page'
+import { ProducersPage } from '@/pages/admin/producers-page'
 import { RequireAuthProvider } from '@/providers/require-auth-provider'
 
 const router = createBrowserRouter([
@@ -144,6 +145,10 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.colors,
                 element: <ColorsPage />
+            },
+            {
+                path: adminRoutes.producers,
+                element: <ProducersPage />
             }
         ]
     },

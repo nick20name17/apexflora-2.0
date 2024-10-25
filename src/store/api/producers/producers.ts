@@ -22,18 +22,18 @@ export const producers = api.injectEndpoints({
             },
             providesTags: ['Producers']
         }),
-        getProducers: build.query<ProducersResponse, ProducersQueryParams>({
+        getProducers: build.query<ProducersResponse, Partial<ProducersQueryParams>>({
             query: (queryParams) => {
                 const queryString = getQueryParamString(queryParams)
                 return `producers?${queryString}`
             },
             providesTags: ['Producers']
         }),
-        getColor: build.query<ProducersData, number>({
+        getProducer: build.query<ProducersData, number>({
             query: (id) => `producers/${id}`,
             providesTags: ['Producers']
         }),
-        addColor: build.mutation<void, ProducersAddData>({
+        addProducer: build.mutation<void, ProducersAddData>({
             query: (data) => ({
                 url: `producers/`,
                 method: 'POST',
@@ -41,7 +41,7 @@ export const producers = api.injectEndpoints({
             }),
             invalidatesTags: ['Producers']
         }),
-        patchColor: build.mutation<void, ProducersPatchData>({
+        patchProducer: build.mutation<void, ProducersPatchData>({
             query: ({ id, data }) => ({
                 url: `producers/${id}/`,
                 method: 'PATCH',
@@ -49,7 +49,7 @@ export const producers = api.injectEndpoints({
             }),
             invalidatesTags: ['Producers']
         }),
-        removeColor: build.mutation<void, number>({
+        removeProducer: build.mutation<void, number>({
             query: (id) => ({
                 url: `producers/${id}/`,
                 method: 'DELETE'
@@ -61,10 +61,10 @@ export const producers = api.injectEndpoints({
 
 export const {
     useGetAllProducersQuery,
+    useGetProducerQuery,
+    useRemoveProducerMutation,
+    usePatchProducerMutation,
     useGetProducersCountriesQuery,
-    useAddColorMutation,
-    useGetColorQuery,
-    useGetProducersQuery,
-    useRemoveColorMutation,
-    usePatchColorMutation
+    useAddProducerMutation,
+    useGetProducersQuery
 } = producers

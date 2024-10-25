@@ -165,3 +165,12 @@ export const colorSchema = object({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
 })
+
+export const producerSchema = object({
+    name: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    country: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим")
+})

@@ -18,7 +18,7 @@ export interface ProducersCountriesData {
     country: string
 }
 
-export type ProducersAddData = Omit<ProducersData, 'id'>
+export type ProducersAddData = Omit<ProducersCountriesData, 'id'>
 
 export type ProducersPatchData = PatchData<ProducersAddData>
 

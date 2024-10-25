@@ -10,23 +10,23 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog'
-import { useRemoveColorMutation } from '@/store/api/colors/colors'
-import type { Color } from '@/store/api/shop-products/shop-products.types'
+import { useRemoveProducerMutation } from '@/store/api/producers/producers'
+import type { Producer } from '@/store/api/shop-products/shop-products.types'
 
-interface RemoveColorModalProps {
-    color: Color
+interface RemoveProducerModalProps {
+    producer: Producer
 }
 
-export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
-    const [removeColor, { isLoading }] = useRemoveColorMutation()
+export const RemoveProducerModal = ({ producer }: RemoveProducerModalProps) => {
+    const [removeProducer, { isLoading }] = useRemoveProducerMutation()
 
     const [open, setOpen] = useState(false)
 
-    const handleRemoveColor = (id: number) => {
+    const handleRemoveProducer = (id: number) => {
         try {
-            removeColor(id).then(() => {
+            removeProducer(id).then(() => {
                 setOpen(false)
-                toast.success('Колір успішно видалено')
+                toast.success('Виробника успішно видалено')
             })
         } catch (error) {
             toast.error('Щось пішло не так')
@@ -50,7 +50,7 @@ export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
                 <DialogHeader className='text-left'>
                     <DialogTitle>
                         Видалити колір{' '}
-                        <span className='text-destructive'>{color.name}</span>?
+                        <span className='text-destructive'>{producer.name}</span>?
                     </DialogTitle>
                 </DialogHeader>
 
@@ -67,7 +67,7 @@ export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
                     <Button
                         disabled={isLoading}
                         onClick={() => {
-                            handleRemoveColor(color.id)
+                            handleRemoveProducer(producer.id)
                         }}
                         size='sm'
                         variant='destructive'

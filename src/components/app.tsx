@@ -23,6 +23,8 @@ import {
     SignInPage,
     SignUpPage
 } from '@/pages'
+import { BonusLimitsPage } from '@/pages/admin/bonus-limits-page'
+import { BonusProgramPage } from '@/pages/admin/bonus-program-page'
 import { CategoriesPage } from '@/pages/admin/categories-page'
 import { ColorsPage } from '@/pages/admin/colors-page'
 import { DiscountsPage } from '@/pages/admin/discounts-page'
@@ -159,6 +161,14 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.categories,
                 element: <CategoriesPage />
+            },
+            {
+                path: adminRoutes.bonusLimits,
+                element: <BonusLimitsPage />
+            },
+            {
+                path: adminRoutes.bonusPrograms,
+                element: <BonusProgramPage />
             }
         ]
     },

@@ -1,3 +1,4 @@
+import type { BonusProgram } from '../bonuses/bonuses.types'
 import type { Coworker } from '../coworkers/coworkers.types'
 
 import type { PatchData, Response } from '@/types/api'
@@ -36,19 +37,6 @@ export interface ServiceManager {
     last_name: string
     phone_number: string
     email: string
-}
-
-export interface BonusProgram {
-    id: number
-    title: string
-    default: boolean
-    limits: Limits
-}
-
-export interface Limits {
-    id: number
-    accumulation_limit: number
-    discount: number
 }
 
 export type UsersPatchData = PatchData<UsersAddData>

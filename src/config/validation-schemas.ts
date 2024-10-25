@@ -1,4 +1,4 @@
-import { date, object, string } from 'zod'
+import { array, boolean, date, object, string } from 'zod'
 
 export const passwordSchema = object({
     password: string({
@@ -197,4 +197,23 @@ export const categoriesSchema = object({
     parent: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
+})
+
+export const bonusLimitsSchema = object({
+    accumulation_limit: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    discount: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим")
+})
+
+export const bonusProgramsSchema = object({
+    title: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    default: boolean({
+        required_error: "Це поле є обов'язковим"
+    }),
+    limits: array(string()).min(1, 'Оберіть хоча б один ліміт')
 })

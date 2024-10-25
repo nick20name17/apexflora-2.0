@@ -71,11 +71,11 @@ export const AdminSidebar = () => {
                             <SidebarMenuItem>
                                 <SidebarMenuButton
                                     isActive={
-                                        location.pathname === adminRoutes.bonuseLimits
+                                        location.pathname === adminRoutes.bonusLimits
                                     }
                                     asChild
                                 >
-                                    <Link to={adminRoutes.bonuseLimits}>
+                                    <Link to={adminRoutes.bonusLimits}>
                                         <Infinity />
                                         <span>Бонусні ліміти</span>
                                     </Link>
@@ -84,11 +84,11 @@ export const AdminSidebar = () => {
                             <SidebarMenuItem>
                                 <SidebarMenuButton
                                     isActive={
-                                        location.pathname === adminRoutes.bonusePrograms
+                                        location.pathname === adminRoutes.bonusPrograms
                                     }
                                     asChild
                                 >
-                                    <Link to={adminRoutes.bonusePrograms}>
+                                    <Link to={adminRoutes.bonusPrograms}>
                                         <Percent />
                                         <span>Бонусні програми</span>
                                     </Link>

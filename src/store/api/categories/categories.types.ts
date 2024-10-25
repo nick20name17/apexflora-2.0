@@ -16,9 +16,7 @@ export interface CategoriesQueryParams extends BaseQueryParams {
     search: string
 }
 
-export type CategoriessAddData = Omit<Categories, 'id'> & {
-    creator: number
-}
+export type CategoriessAddData = Omit<Categories, 'id' | 'children'>
 
 export type CategoriessPatchData = PatchData<CategoriessAddData>
 

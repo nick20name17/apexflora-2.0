@@ -189,3 +189,12 @@ export const discountSchema = object({
         required_error: "Це поле є обов'язковим"
     })
 })
+
+export const categoriesSchema = object({
+    name: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    parent: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим")
+})

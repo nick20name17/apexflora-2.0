@@ -23,6 +23,7 @@ import {
     SignInPage,
     SignUpPage
 } from '@/pages'
+import { CategoriesPage } from '@/pages/admin/categories-page'
 import { ColorsPage } from '@/pages/admin/colors-page'
 import { DiscountsPage } from '@/pages/admin/discounts-page'
 import { ProducersPage } from '@/pages/admin/producers-page'
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.discounts,
                 element: <DiscountsPage />
+            },
+            {
+                path: adminRoutes.categories,
+                element: <CategoriesPage />
             }
         ]
     },

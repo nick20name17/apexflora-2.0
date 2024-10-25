@@ -27,6 +27,7 @@ import { BonusLimitsPage } from '@/pages/admin/bonus-limits-page'
 import { BonusProgramPage } from '@/pages/admin/bonus-program-page'
 import { CategoriesPage } from '@/pages/admin/categories-page'
 import { ColorsPage } from '@/pages/admin/colors-page'
+import { ContactPage } from '@/pages/admin/contacts-page'
 import { DiscountsPage } from '@/pages/admin/discounts-page'
 import { ProducersPage } from '@/pages/admin/producers-page'
 import { RequireAuthProvider } from '@/providers/require-auth-provider'
@@ -169,6 +170,10 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.bonusPrograms,
                 element: <BonusProgramPage />
+            },
+            {
+                path: adminRoutes.contacts,
+                element: <ContactPage />
             }
         ]
     },

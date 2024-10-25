@@ -1,4 +1,4 @@
-import type { PatchData, Response } from '@/types/api'
+import type { BaseQueryParams, PatchData, Response } from '@/types/api'
 
 export interface Contacts {
     id: number
@@ -10,8 +10,13 @@ export interface Contacts {
     comment: string
 }
 
-export type ContactsAddData = Omit<Contacts, 'id' | 'is_read' | 'comment'>
+export type ContactsAddData = Omit<Contacts, 'id'>
 
 export type ContactsPatchData = PatchData<ContactsAddData>
 
 export type ContactsResponse = Response<Contacts>
+
+export interface ContactsQueryParams extends BaseQueryParams {
+    name: string
+    search: string
+}

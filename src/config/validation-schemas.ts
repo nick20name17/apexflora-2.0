@@ -1,4 +1,4 @@
-import { object, string } from 'zod'
+import { date, object, string } from 'zod'
 
 export const passwordSchema = object({
     password: string({
@@ -173,4 +173,19 @@ export const producerSchema = object({
     country: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")
+})
+
+export const discountSchema = object({
+    name: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    percentage: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    start_date: date({
+        required_error: "Це поле є обов'язковим"
+    }),
+    end_date: date({
+        required_error: "Це поле є обов'язковим"
+    })
 })

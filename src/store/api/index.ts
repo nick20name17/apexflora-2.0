@@ -112,7 +112,8 @@ export const api = createApi({
         'Categories',
         'Orders',
         'Basket',
-        'ContactUs'
+        'ContactUs',
+        'Discounts'
     ]
 })
 

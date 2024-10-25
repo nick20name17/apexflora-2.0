@@ -1,4 +1,5 @@
 import type { Categories } from '../categories/categories.types'
+import type { Discount } from '../discounts/discounts.types'
 import type { Country } from '../producers/producers.types'
 
 import type { BaseQueryParams, PatchData, Response } from '@/types/api'
@@ -77,15 +78,6 @@ export interface InnerShopProduct {
 export interface Status {
     id: number
     name: string
-}
-
-export interface Discount {
-    id: number
-    name: string
-    percentage: string
-    start_date: string
-    end_date: string
-    shop: number
 }
 
 export type ShopProductsAddData = Omit<ShopProduct, 'id'> & {

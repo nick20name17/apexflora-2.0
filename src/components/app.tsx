@@ -24,6 +24,7 @@ import {
     SignUpPage
 } from '@/pages'
 import { ColorsPage } from '@/pages/admin/colors-page'
+import { DiscountsPage } from '@/pages/admin/discounts-page'
 import { ProducersPage } from '@/pages/admin/producers-page'
 import { RequireAuthProvider } from '@/providers/require-auth-provider'
 
@@ -149,6 +150,10 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.producers,
                 element: <ProducersPage />
+            },
+            {
+                path: adminRoutes.discounts,
+                element: <DiscountsPage />
             }
         ]
     },

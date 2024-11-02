@@ -126,20 +126,7 @@ export const AdminSidebar = () => {
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton
-                                    isActive={
-                                        location.pathname ===
-                                        adminRoutes.registrationRequests
-                                    }
-                                    asChild
-                                >
-                                    <Link to={adminRoutes.registrationRequests}>
-                                        <UserPlus />
-                                        <span>Запити на реєстрацію</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
+
                             <SidebarMenuItem>
                                 <SidebarMenuButton
                                     isActive={location.pathname === adminRoutes.users}

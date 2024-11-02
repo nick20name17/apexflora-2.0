@@ -33,7 +33,11 @@ import {
 
 type BonusProgramsFormValues = Zod.infer<typeof bonusProgramsSchema>
 
-export const AddBonusProgramsModal = () => {
+interface AddBonusProgramsModalProps {
+    size?: 'icon' | 'sm'
+}
+
+export const AddBonusProgramsModal = ({ size = 'sm' }: AddBonusProgramsModalProps) => {
     const [open, setOpen] = useState(false)
 
     const [addBonusPrograms, { isLoading }] = useAddBonusProgramMutation()
@@ -79,9 +83,12 @@ export const AddBonusProgramsModal = () => {
             onOpenChange={setOpen}
         >
             <DialogTrigger asChild>
-                <Button size='sm'>
-                    <CirclePlus className='mr-2 size-4' />
-                    Додати нову бонусну програму
+                <Button
+                    className='flex items-center gap-x-2'
+                    size={size}
+                >
+                    <CirclePlus className='size-4' />
+                    {size === 'icon' ? '' : 'Додати бонусну програму'}
                 </Button>
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>

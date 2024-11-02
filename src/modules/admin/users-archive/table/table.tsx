@@ -78,7 +78,7 @@ export const DataTable = <TData, TValue>({
                                 colSpan={columns.length}
                                 className='h-24 text-center'
                             >
-                                Знижок не знайдено
+                                Користувачів не знайдено
                             </TableCell>
                         </TableRow>
                     )}

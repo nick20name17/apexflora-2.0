@@ -24,7 +24,7 @@ export const columns: ColumnDef<BonusProgram>[] = [
         }
     },
     {
-        accessorKey: 'hex',
+        accessorKey: 'limits',
         header: () => <div className='w-60'>Знижки</div>,
         cell: ({ row }) => {
             const concatenatedDiscounts = row.original.limits

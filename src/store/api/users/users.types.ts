@@ -1,9 +1,9 @@
 import type { BonusProgram } from '../bonuses/bonuses.types'
 import type { Coworker } from '../coworkers/coworkers.types'
 
-import type { PatchData, Response } from '@/types/api'
+import type { BaseQueryParams, PatchData, Response } from '@/types/api'
 
-export type Roles = 'admin' | 'manager' | 'user'
+export type Roles = 'admin' | 'manager' | 'client'
 export interface User {
     id: number
     email: string
@@ -20,6 +20,7 @@ export interface User {
     bonus_program: BonusProgram
     coworkers: Coworker[]
     last_login: string
+    is_deleted: boolean
 }
 
 export type UsersAddData = Omit<
@@ -42,3 +43,9 @@ export interface ServiceManager {
 export type UsersPatchData = PatchData<UsersAddData>
 
 export type UsersResponse = Response<User>
+
+export interface UserQueryParams extends BaseQueryParams {
+    search: string
+    role: string
+    is_active: boolean
+}

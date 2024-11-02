@@ -23,7 +23,6 @@ export const adminRoutes = {
     users: '/admin/users',
     archive: '/admin/archive',
     orders: '/admin/orders',
-    registrationRequests: '/admin/registration-requests',
     contacts: '/admin/contacts',
     categories: '/admin/categories',
     producers: '/admin/producers',

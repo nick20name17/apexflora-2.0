@@ -1,6 +1,8 @@
-import type { Categories } from '../categories/categories.types'
+import type { ColorsData } from '../colors/colors.types'
 import type { Discount } from '../discounts/discounts.types'
-import type { Country } from '../producers/producers.types'
+import type { Product } from '../orders/orders.types'
+import type { ProducersData } from '../producers/producers.types'
+import type { StatusProductData } from '../status-products/status-products.types'
 
 import type { BaseQueryParams, PatchData, Response } from '@/types/api'
 
@@ -18,36 +20,16 @@ export interface ShopProduct {
     length: number
     code_1c: string
     main_property: string
-    producer: Producer
+    producer: ProducersData
     product: Product
-    colors: Color[]
+    colors: ColorsData[]
     stocks: Stock[]
-}
-
-export interface Producer {
-    id: number
-    name: string
-    country: Country
-}
-
-export interface Product {
-    id: number
-    name: string
-    ukr_name: string
-    description: string
-    category: Categories
-}
-
-export interface Color {
-    id: number
-    name: string
-    hex: string
 }
 
 export interface Stock {
     id: number
     shop_product: InnerShopProduct
-    status: Status
+    status: StatusProductData
     quantity: number
     retail_price: string
     stock_price: string
@@ -73,11 +55,6 @@ export interface InnerShopProduct {
     width: number
     length: number
     main_property: string
-}
-
-export interface Status {
-    id: number
-    name: string
 }
 
 export type ShopProductsAddData = Omit<ShopProduct, 'id'> & {

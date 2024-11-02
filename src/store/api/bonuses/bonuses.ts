@@ -44,7 +44,10 @@ export const bonusLimits = api.injectEndpoints({
             }),
             invalidatesTags: ['BonusLimits']
         }),
-        getBonusPrograms: build.query<BonusProgramResponse, BonusProgramsQueryParams>({
+        getBonusPrograms: build.query<
+            BonusProgramResponse,
+            Partial<BonusProgramsQueryParams>
+        >({
             query: (queryParams) => {
                 const queryString = getQueryParamString(queryParams)
                 return `bonuses-programs?${queryString}`

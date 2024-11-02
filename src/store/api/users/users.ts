@@ -1,19 +1,29 @@
 import { api } from '..'
 
-import type { UsersAddData, UsersPatchData, UsersResponse } from './users.types'
-import type { BaseQueryParams } from '@/types/api'
+import type {
+    UserQueryParams,
+    UsersAddData,
+    UsersPatchData,
+    UsersResponse
+} from './users.types'
 import { getQueryParamString } from '@/utils'
 
 export const users = api.injectEndpoints({
     endpoints: (build) => ({
-        getUsers: build.query<UsersResponse, Partial<BaseQueryParams>>({
+        getUsers: build.query<UsersResponse, Partial<UserQueryParams>>({
             query: (params) => {
                 const queryString = getQueryParamString(params)
                 return `users/?${queryString}`
             },
             providesTags: ['Users']
         }),
-
+        getDeletedUsers: build.query<UsersResponse, Partial<UserQueryParams>>({
+            query: (params) => {
+                const queryString = getQueryParamString(params)
+                return `users/deleted/?${queryString}`
+            },
+            providesTags: ['Users']
+        }),
         addUser: build.mutation<void, Partial<UsersAddData>>({
             query: (data) => ({
                 url: `users/`,
@@ -43,7 +53,7 @@ export const users = api.injectEndpoints({
 
 export const {
     useGetUsersQuery,
-
+    useGetDeletedUsersQuery,
     useAddUserMutation,
     usePatchUserMutation,
     useRemoveUserMutation

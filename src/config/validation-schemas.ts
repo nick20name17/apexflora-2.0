@@ -1,4 +1,4 @@
-import { array, boolean, date, object, string } from 'zod'
+import { array, boolean, date, literal, object, string, union } from 'zod'
 
 export const passwordSchema = object({
     password: string({
@@ -216,4 +216,59 @@ export const bonusProgramsSchema = object({
         required_error: "Це поле є обов'язковим"
     }),
     limits: array(string()).min(1, 'Оберіть хоча б один ліміт')
+})
+
+export const userSchema = object({
+    ...userInfoSchema.shape,
+    role: union([literal('admin'), literal('manager'), literal('client')]),
+    code_1c: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    bonus_program: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    service_manager: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    city: object({
+        ref: string({
+            required_error: "Це поле є обов'язковим"
+        }).min(1, "Це поле є обов'язковим"),
+        name: string({
+            required_error: "Це поле є обов'язковим"
+        }).min(1, "Це поле є обов'язковим")
+    }).refine((data) => data.ref && data.name, {
+        message: "Це поле є обов'язковим"
+    }),
+    ...passwordSchema.shape
+})
+
+export const editUserSchema = object({
+    ...userInfoSchema.shape,
+    role: union([literal('admin'), literal('manager'), literal('client')]),
+    code_1c: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    bonus_program: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    service_manager: string({
+        required_error: "Це поле є обов'язковим"
+    }).min(1, "Це поле є обов'язковим"),
+    city: object({
+        ref: string({
+            required_error: "Це поле є обов'язковим"
+        }).min(1, "Це поле є обов'язковим"),
+        name: string({
+            required_error: "Це поле є обов'язковим"
+        }).min(1, "Це поле є обов'язковим")
+    }).refine((data) => data.ref && data.name, {
+        message: "Це поле є обов'язковим"
+    }),
+    is_active: boolean({
+        required_error: "Це поле є обов'язковим"
+    }),
+    is_deleted: boolean({
+        required_error: "Це поле є обов'язковим"
+    })
 })

@@ -115,7 +115,8 @@ export const api = createApi({
         'ContactUs',
         'Discounts',
         'BonusLimits',
-        'BonusPrograms'
+        'BonusPrograms',
+        'ServiceManager'
     ]
 })
 

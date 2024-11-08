@@ -27,7 +27,11 @@ import { useAddDiscountMutation } from '@/store/api/discounts/discounts'
 
 type DiscountFormValues = Zod.infer<typeof discountSchema>
 
-export const AddDiscountModal = () => {
+interface AddDiscountModalProps {
+    size?: 'sm' | 'icon'
+}
+
+export const AddDiscountModal = ({ size = 'sm' }: AddDiscountModalProps) => {
     const [open, setOpen] = useState(false)
 
     const [addDiscount, { isLoading }] = useAddDiscountMutation()
@@ -35,8 +39,8 @@ export const AddDiscountModal = () => {
     const form = useCustomForm(discountSchema, {
         name: '',
         percentage: '',
-        start_date: '',
-        end_date: ''
+        start_date: '' as any,
+        end_date: '' as any
     })
 
     const handleAddDiscount = (data: DiscountFormValues) => {
@@ -65,9 +69,12 @@ export const AddDiscountModal = () => {
             onOpenChange={setOpen}
         >
             <DialogTrigger asChild>
-                <Button size='sm'>
-                    <CirclePlus className='mr-2 size-4' />
-                    Додати нову знижку
+                <Button
+                    className='flex-shrink-0 gap-x-2'
+                    size={size}
+                >
+                    <CirclePlus className='size-4' />
+                    {size === 'icon' ? '' : ' Додати нову знижку'}
                 </Button>
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>

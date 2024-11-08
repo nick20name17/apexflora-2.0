@@ -1,3 +1,4 @@
+import type { Categories } from '../categories/categories.types'
 import type { ShopProduct } from '../shop-products/shop-products.types'
 import type { StatusProductData } from '../status-products/status-products.types'
 
@@ -60,7 +61,7 @@ export interface Product {
     name: string
     ukr_name: string
     description: string
-    category: number
+    category: Categories
 }
 
 export interface Recipient {
@@ -89,14 +90,14 @@ export interface Address {
 }
 
 export interface OrdersQueryParams extends BaseQueryParams {
-    creator: string;
-    is_supplier: boolean;
-    created_at: string;
-    is_preorder: boolean;
-    stock_status: string;
-    is_visible: boolean;
-    search: string;
-    ordering: string;
+    creator: string
+    is_supplier: boolean
+    created_at: string
+    is_preorder: boolean
+    stock_status: string
+    is_visible: boolean
+    search: string
+    ordering: string
 }
 
 export type OrdersResponse = Response<Order>

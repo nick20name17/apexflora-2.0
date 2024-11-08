@@ -25,7 +25,7 @@ export const Discounts = () => {
                     {isLoading ? (
                         <Skeleton className='size-10 rounded-lg' />
                     ) : (
-                        <div className='flex size-10 items-center justify-center rounded-lg bg-secondary'>
+                        <div className='flex h-10 min-w-10 items-center justify-center rounded-lg bg-secondary px-1'>
                             {data?.count}
                         </div>
                     )}

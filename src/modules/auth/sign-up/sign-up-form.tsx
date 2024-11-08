@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import type { z } from 'zod'
 
+import { CitySelect } from '@/components/shared/city-select'
 import { Button } from '@/components/ui/button'
 import {
     Form,
@@ -30,9 +31,12 @@ export const SignUpForm = () => {
 
     const [error] = useState('')
 
-    const onSubmit = (values: SignUpFormValues) => {
+    const onSubmit = (data: SignUpFormValues) => {
         try {
-            addUser(values).then(() => {
+            addUser({
+                ...data,
+                city: data.city.ref
+            }).then(() => {
                 navigate(routes.catalogue)
             })
         } catch (error) {
@@ -111,10 +115,9 @@ export const SignUpForm = () => {
                                     <FormItem>
                                         <FormLabel>Місто</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                placeholder='Рівне'
-                                                type='text'
-                                                {...field}
+                                            <CitySelect
+                                                city={field.value}
+                                                setCity={field.onChange}
                                             />
                                         </FormControl>
 

@@ -18,7 +18,11 @@ import { useAddProducerMutation } from '@/store/api/producers/producers'
 
 type ProducerFormValues = Zod.infer<typeof producerSchema>
 
-export const AddProducerModal = () => {
+interface AddProducerModalProps {
+    size?: 'icon' | 'sm'
+}
+
+export const AddProducerModal = ({ size = 'sm' }: AddProducerModalProps) => {
     const [open, setOpen] = useState(false)
 
     const [addProducer, { isLoading }] = useAddProducerMutation()
@@ -50,9 +54,12 @@ export const AddProducerModal = () => {
             onOpenChange={setOpen}
         >
             <DialogTrigger asChild>
-                <Button size='sm'>
-                    <CirclePlus className='mr-2 size-4' />
-                    Додати нового виробника
+                <Button
+                    className='flex-shrink-0 gap-x-2'
+                    size={size}
+                >
+                    <CirclePlus className='size-4' />
+                    {size === 'icon' ? '' : 'Додати нового виробник'}
                 </Button>
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>

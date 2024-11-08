@@ -14,7 +14,7 @@ import type { Stock } from '@/store/api/shop-products/shop-products.types'
 import { useAppSelector } from '@/store/hooks/hooks'
 import { selectUser } from '@/store/slices/auth'
 
-const getStatusProductsDisplay = (status: number) => {
+export const getStatusProductsDisplay = (status: number) => {
     switch (status) {
         case 1:
             return {

@@ -19,7 +19,11 @@ import { useAddColorMutation } from '@/store/api/colors/colors'
 
 type ColorFormValues = Zod.infer<typeof colorSchema>
 
-export const AddColorModal = () => {
+interface AddColorModalProps {
+    size?: 'icon' | 'sm'
+}
+
+export const AddColorModal = ({ size = 'sm' }: AddColorModalProps) => {
     const [open, setOpen] = useState(false)
 
     const [addColor, { isLoading }] = useAddColorMutation()
@@ -51,9 +55,12 @@ export const AddColorModal = () => {
             onOpenChange={setOpen}
         >
             <DialogTrigger asChild>
-                <Button size='sm'>
-                    <CirclePlus className='mr-2 size-4' />
-                    Додати новий колір
+                <Button
+                    className='flex-shrink-0 gap-x-2'
+                    size={size}
+                >
+                    <CirclePlus className='size-4' />
+                    {size === 'icon' ? '' : 'Додати новий колір'}
                 </Button>
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>

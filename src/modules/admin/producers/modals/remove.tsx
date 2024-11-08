@@ -11,10 +11,10 @@ import {
     DialogTrigger
 } from '@/components/ui/dialog'
 import { useRemoveProducerMutation } from '@/store/api/producers/producers'
-import type { Producer } from '@/store/api/shop-products/shop-products.types'
+import type { ProducersData } from '@/store/api/producers/producers.types'
 
 interface RemoveProducerModalProps {
-    producer: Producer
+    producer: ProducersData
 }
 
 export const RemoveProducerModal = ({ producer }: RemoveProducerModalProps) => {
@@ -71,7 +71,7 @@ export const RemoveProducerModal = ({ producer }: RemoveProducerModalProps) => {
                         }}
                         size='sm'
                         variant='destructive'
-                        className='flex w-20 items-center gap-x-1.5'
+                        className='flex w-24 items-center gap-x-1.5'
                     >
                         {isLoading ? (
                             <Loader2 className='size-4 animate-spin' />

@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { BooleanParam, StringParam, useQueryParam } from 'use-query-params'
 
+import { StatusTabs } from '../../components/shared/status-tabs'
+
 import { CatalogueProducts } from './catalogue-products'
 import { CatalogueTop } from './catalogue-top'
 import { FiltersSidebar } from './filters-sidebar'
 import { OrderedModal } from './ordered-modal'
-import { StatusTabs } from './status-tabs'
 import { setCurrentQueryParams } from './store/catalogue'
 import { tableConfig } from '@/config/table'
 import { useBodyScrollLock } from '@/hooks'
 import { useGetShopProductsQuery } from '@/store/api/shop-products/shop-products'
+import type { ShopProductQueryParams } from '@/store/api/shop-products/shop-products.types'
 import { useAppDispatch } from '@/store/hooks/hooks'
 
 export interface ActiveFilter {
@@ -34,7 +36,7 @@ export const Catalogue = () => {
 
     const [offset, setOffset] = useState(0)
 
-    const queryParams = {
+    const queryParams: Partial<ShopProductQueryParams> = {
         limit: tableConfig.pagination.pageSize,
         offset,
         statuses: status!,
@@ -44,7 +46,8 @@ export const Catalogue = () => {
         countries: countries!,
         categories: categories!,
         promotion: promo!,
-        colors: colors!
+        colors: colors!,
+        is_visible: true
     }
 
     const { data, isLoading, isFetching } = useGetShopProductsQuery(queryParams)

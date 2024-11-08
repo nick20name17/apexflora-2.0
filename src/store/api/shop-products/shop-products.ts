@@ -4,7 +4,9 @@ import type {
     ShopProductQueryParams,
     ShopProductResponse,
     ShopProductsAddData,
-    ShopProductsPatchData
+    ShopProductsPatchData,
+    SupplierOrderData,
+    SupplierOrderResponse
 } from './shop-products.types'
 import { getQueryParamString } from '@/utils'
 
@@ -47,6 +49,14 @@ export const shopProducts = api.injectEndpoints({
             }),
             invalidatesTags: ['ShopProducts']
         }),
+        addSupplierOrder: build.mutation<SupplierOrderResponse, SupplierOrderData>({
+            query: (data) => ({
+                url: `shop_products/import-supplier-order/`,
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['ShopProducts', 'Orders']
+        }),
         patchShopProducts: build.mutation<void, ShopProductsPatchData>({
             query: ({ data, id }) => ({
                 url: `shop-products/${id}/`,
@@ -70,5 +80,6 @@ export const {
     useGetShopProductsQuery,
     useAddShopProductsMutation,
     usePatchShopProductsMutation,
+    useAddSupplierOrderMutation,
     useRemoveShopProductsMutation
 } = shopProducts

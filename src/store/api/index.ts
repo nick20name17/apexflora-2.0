@@ -73,7 +73,7 @@ const baseQueryWithReauth: BaseQueryFn<
             if (localStorage.getItem('token')) {
                 localStorage.setItem('token', JSON.stringify({ access, refresh }))
             } else {
-                sessionStorage.setItem('token', JSON.stringify({ access, refresh }))
+                localStorage.setItem('token', JSON.stringify({ access, refresh }))
             }
 
             result = await baseQuery(args, api, extraOptions)
@@ -116,7 +116,9 @@ export const api = createApi({
         'Discounts',
         'BonusLimits',
         'BonusPrograms',
-        'ServiceManager'
+        'ServiceManager',
+        'Products',
+        'Stocks'
     ]
 })
 

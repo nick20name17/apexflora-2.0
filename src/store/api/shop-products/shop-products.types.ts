@@ -57,11 +57,21 @@ export interface InnerShopProduct {
     main_property: string
 }
 
-export type ShopProductsAddData = Omit<ShopProduct, 'id'> & {
-    producer: number
+export interface ShopProductsAddData {
     product: number
     colors: number[]
-    stocks: number
+    origin_id: string
+    producer: number
+    height: number
+    weight_size: number
+    stage: number
+    packaging_of: number
+    quality: string
+    code_1c: string
+    width: number
+    length: number
+    main_property: string
+    image: FormData
 }
 
 export type ShopProductsPatchData = PatchData<ShopProductsAddData>
@@ -88,11 +98,27 @@ export interface ShopProductQueryParams extends BaseQueryParams {
     colors: string
     multicolor: string
     has_discounts: boolean
-    promotion: boolean
-    has_code_1c: string
-    is_visible: string
+    promotion: boolean | null
+    has_code_1c: boolean | null
+    has_image: boolean | null
+    is_visible: boolean | null
     search: string
     ordering: string
 }
 
-export type ShopProductResponse = Response<ShopProduct>
+export interface SupplierOrderData {
+    product_status: number
+    file: FormData
+    category: string
+}
+
+export interface SupplierOrderResponse {
+    amount_total: number
+    count_updated: number
+    not_updated: number
+    order_id: number
+}
+
+export type ShopProductResponse = Response<ShopProduct> & {
+    possible_letters: string[]
+}

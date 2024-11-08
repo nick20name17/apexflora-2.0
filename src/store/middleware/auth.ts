@@ -20,11 +20,11 @@ listenerMiddleware.startListening({
             )
             localStorage.setItem('id', JSON.stringify({ id: action.payload.user?.id }))
         } else if (action.payload.refresh) {
-            sessionStorage.setItem(
+            localStorage.setItem(
                 'token',
                 JSON.stringify({ refresh: action.payload.refresh })
             )
-            sessionStorage.setItem('id', JSON.stringify({ id: action.payload.user?.id }))
+            localStorage.setItem('id', JSON.stringify({ id: action.payload.user?.id }))
         }
     }
 })

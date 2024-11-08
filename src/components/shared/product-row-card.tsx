@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Car, Heart, Ship, TimerIcon } from 'lucide-react'
 
 import { Button } from '../ui/button'
@@ -71,8 +71,8 @@ export const ProductRowCard = ({
                         {shopProduct.image ? (
                             <img
                                 className='h-full w-full rounded-sm object-cover'
-                                src={shopProduct.image}
-                                alt={shopProduct.product.name}
+                                src={shopProduct?.image}
+                                alt={shopProduct?.product?.name}
                             />
                         ) : (
                             <Skeleton className='h-full w-full rounded-sm object-cover' />
@@ -85,7 +85,7 @@ export const ProductRowCard = ({
                                 isOpen ? 'text-secondary' : 'text-primary'
                             )}
                         >
-                            {shopProduct.product.ukr_name}
+                            {shopProduct.product?.ukr_name}
                         </h1>
                         <span
                             className={cn(
@@ -95,10 +95,10 @@ export const ProductRowCard = ({
                         >
                             <img
                                 className='size-3.5'
-                                src={shopProduct.producer.country.flag}
-                                alt={shopProduct.producer.country.name}
+                                src={shopProduct.producer?.country?.flag}
+                                alt={shopProduct.producer?.country?.name}
                             />
-                            {shopProduct.producer.name}
+                            {shopProduct?.producer?.name}
                         </span>
                     </div>
                 </div>
@@ -109,88 +109,88 @@ export const ProductRowCard = ({
                         isOpen ? 'text-secondary' : 'text-foreground/50'
                     )}
                 >
-                    <AnimatePresence
+                    {/* <AnimatePresence
                         initial={false}
                         mode='popLayout'
+                    > */}
+                    <div
+                        {...animations.popLayout}
+                        className='flex flex-col'
                     >
-                        <motion.div
-                            {...animations.popLayout}
-                            className='flex flex-col'
-                        >
-                            {isOpen ? <span className='text-accent'>Колір</span> : null}
-                            <span>Білий</span>
-                        </motion.div>
+                        {isOpen ? <span className='text-accent'>Колір</span> : null}
+                        <span>Білий</span>
+                    </div>
 
-                        <motion.div
-                            {...animations.popLayout}
-                            className='flex flex-col'
-                        >
-                            {isOpen ? <span className='text-accent'>Висота</span> : null}
-                            <span>{shopProduct.height}см</span>
-                        </motion.div>
-                        <motion.div
-                            {...animations.popLayout}
-                            className='flex flex-col'
-                        >
-                            {isOpen ? <span className='text-accent'>Якість</span> : null}
-                            <span>{shopProduct.quality}</span>
-                        </motion.div>
-                        <motion.div
-                            {...animations.popLayout}
-                            className='flex flex-col'
-                        >
-                            {isOpen ? (
-                                <span className='text-accent'>Вагa/d&nbsp;⌀</span>
-                            ) : null}
-                            <span>{shopProduct.weight_size || '-'}</span>
-                        </motion.div>
+                    <div
+                        {...animations.popLayout}
+                        className='flex flex-col'
+                    >
+                        {isOpen ? <span className='text-accent'>Висота</span> : null}
+                        <span>{shopProduct.height}см</span>
+                    </div>
+                    <div
+                        {...animations.popLayout}
+                        className='flex flex-col'
+                    >
+                        {isOpen ? <span className='text-accent'>Якість</span> : null}
+                        <span>{shopProduct.quality}</span>
+                    </div>
+                    <div
+                        {...animations.popLayout}
+                        className='flex flex-col'
+                    >
                         {isOpen ? (
-                            <motion.div
-                                {...animations.popLayout}
-                                className='flex flex-col'
-                            >
-                                <span className='text-accent'>Зрілість</span>
-                                <span>{shopProduct.stage}</span>
-                            </motion.div>
+                            <span className='text-accent'>Вагa/d&nbsp;⌀</span>
                         ) : null}
-                        {isOpen ? (
-                            <motion.div
-                                {...animations.popLayout}
-                                className='flex flex-col'
-                            >
-                                <span className='text-accent'>Артикул</span>
-                                <span>{shopProduct.origin_id}</span>
-                            </motion.div>
-                        ) : null}
-                    </AnimatePresence>
+                        <span>{shopProduct.weight_size || '-'}</span>
+                    </div>
+                    {isOpen ? (
+                        <div
+                            {...animations.popLayout}
+                            className='flex flex-col'
+                        >
+                            <span className='text-accent'>Зрілість</span>
+                            <span>{shopProduct.stage}</span>
+                        </div>
+                    ) : null}
+                    {isOpen ? (
+                        <div
+                            {...animations.popLayout}
+                            className='flex flex-col'
+                        >
+                            <span className='text-accent'>Артикул</span>
+                            <span>{shopProduct.origin_id}</span>
+                        </div>
+                    ) : null}
+                    {/* </AnimatePresence> */}
                 </div>
 
                 <div className='flex items-center justify-end gap-x-4'>
-                    <AnimatePresence
+                    {/* <AnimatePresence
                         initial={false}
                         mode='popLayout'
-                    >
-                        <motion.div
-                            {...animations.popLayout}
-                            className={cn(
-                                'flex items-center gap-x-2',
-                                isOpen ? 'text-accent' : 'text-foreground/60'
-                            )}
-                        >
-                            <Ship className='size-6' />
-                            <TimerIcon className='size-6' />
-                            <Car className='size-6' />
-                        </motion.div>
-                        {isOpen ? null : (
-                            <motion.span
-                                {...animations.popLayout}
-                                className='text-primary'
-                            >
-                                {' '}
-                                29 ₴
-                            </motion.span>
+                    > */}
+                    <div
+                        {...animations.popLayout}
+                        className={cn(
+                            'flex items-center gap-x-2',
+                            isOpen ? 'text-accent' : 'text-foreground/60'
                         )}
-                    </AnimatePresence>
+                    >
+                        <Ship className='size-6' />
+                        <TimerIcon className='size-6' />
+                        <Car className='size-6' />
+                    </div>
+                    {isOpen ? null : (
+                        <motion.span
+                            {...animations.popLayout}
+                            className='text-primary'
+                        >
+                            {' '}
+                            29 ₴
+                        </motion.span>
+                    )}
+                    {/* </AnimatePresence> */}
                 </div>
 
                 <div className='flex items-center justify-end gap-x-2'>

@@ -71,7 +71,7 @@ export const RemoveCategoriesModal = ({ category }: RemoveCategoriesModalProps) 
                         }}
                         size='sm'
                         variant='destructive'
-                        className='flex w-20 items-center gap-x-1.5'
+                        className='flex w-24 items-center gap-x-1.5'
                     >
                         {isLoading ? (
                             <Loader2 className='size-4 animate-spin' />

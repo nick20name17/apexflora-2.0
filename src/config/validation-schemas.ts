@@ -74,9 +74,14 @@ export const signUpSchema = object({
     last_name: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим"),
-    city: string({
-        required_error: "Це поле є обов'язковим"
-    }).min(1, "Це поле є обов'язковим"),
+    city: object({
+        ref: string({
+            required_error: "Це поле є обов'язковим"
+        }).min(1, "Це поле є обов'язковим"),
+        name: string({
+            required_error: "Це поле є обов'язковим"
+        }).min(1, "Це поле є обов'язковим")
+    }),
     phone_number: string({
         required_error: "Це поле є обов'язковим"
     }).min(1, "Це поле є обов'язковим")

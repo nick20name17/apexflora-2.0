@@ -51,12 +51,12 @@ export const CartProductCard = ({ basketProduct }: CartProductCardProps) => {
         <div className='flex items-center justify-between gap-x-6 rounded-md border border-secondary p-2'>
             <div className='flex items-center gap-x-2'>
                 <div className='h-20 w-28'>
-                    {basketProduct.stock_product.shop_product.image ? (
+                    {basketProduct.stock_product.shop_product?.image ? (
                         <img
                             className='h-full w-full rounded-sm object-cover'
-                            src={basketProduct.stock_product.shop_product.image}
+                            src={basketProduct.stock_product.shop_product?.image}
                             alt={
-                                basketProduct.stock_product.shop_product.product.ukr_name
+                                basketProduct.stock_product.shop_product?.product?.ukr_name
                             }
                         />
                     ) : (
@@ -65,12 +65,12 @@ export const CartProductCard = ({ basketProduct }: CartProductCardProps) => {
                 </div>
                 <div className='flex flex-col gap-y-1'>
                     <h1 className='font-bold text-primary'>
-                        {basketProduct.stock_product.shop_product.product.ukr_name}
+                        {basketProduct.stock_product.shop_product?.product?.ukr_name}
                     </h1>
                     <span className='flex items-center gap-x-1 text-xs text-foreground/60'>
                         Артикул:{' '}
                         <span>
-                            {basketProduct.stock_product.shop_product.origin_id || '-'}
+                            {basketProduct.stock_product.shop_product?.origin_id || '-'}
                         </span>
                     </span>
                 </div>

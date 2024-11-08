@@ -30,6 +30,7 @@ import { ColorsPage } from '@/pages/admin/colors-page'
 import { ContactPage } from '@/pages/admin/contacts-page'
 import { DiscountsPage } from '@/pages/admin/discounts-page'
 import { ProducersPage } from '@/pages/admin/producers-page'
+import { ProductsPage } from '@/pages/admin/products-page'
 import { UsersArchivePage } from '@/pages/admin/users-archive-page'
 import { UsersPage } from '@/pages/admin/users-page'
 import { RequireAuthProvider } from '@/providers/require-auth-provider'
@@ -184,6 +185,10 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.archive,
                 element: <UsersArchivePage />
+            },
+            {
+                path: adminRoutes.products,
+                element: <ProductsPage />
             }
         ]
     },

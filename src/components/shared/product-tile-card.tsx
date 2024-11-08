@@ -28,8 +28,8 @@ export const ProductTileCard = ({
                     {shopProduct.image ? (
                         <img
                             className='h-full w-full object-cover'
-                            src={shopProduct.image}
-                            alt={shopProduct.product.name}
+                            src={shopProduct?.image}
+                            alt={shopProduct?.product?.name}
                         />
                     ) : (
                         <Skeleton className='h-full w-full rounded-none object-cover' />
@@ -39,7 +39,7 @@ export const ProductTileCard = ({
                     <div className='flex items-start justify-between gap-x-2'>
                         <div>
                             <h1 className='font-bold text-primary'>
-                                {shopProduct.product.ukr_name}
+                                {shopProduct?.product?.ukr_name}
                             </h1>
                             <p className='mt-1 text-xs text-foreground/60'>
                                 Артикул: <span>{shopProduct.origin_id}</span>
@@ -47,8 +47,8 @@ export const ProductTileCard = ({
                         </div>
                         <img
                             className='size-4'
-                            src={shopProduct.producer.country.flag}
-                            alt={shopProduct.producer.country.name}
+                            src={shopProduct.producer?.country?.flag}
+                            alt={shopProduct.producer?.country?.name}
                         />
                     </div>
                     <div className='mt-2 flex items-center justify-between gap-x-2 border-t border-t-primary pt-2 text-xs'>

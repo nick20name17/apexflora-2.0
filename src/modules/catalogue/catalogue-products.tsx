@@ -26,7 +26,7 @@ export const CatalogueProducts = ({
     setOffset,
     offset
 }: CatalogueProductsProps) => {
-    const [view] = useQueryParam('view', StringParam)
+    const [view = 'lines'] = useQueryParam('view', StringParam)
 
     const [openCardIndex, setOpenCardIndex] = useState<number | null>(null)
 

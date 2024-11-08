@@ -84,7 +84,7 @@ export const AddBonusProgramsModal = ({ size = 'sm' }: AddBonusProgramsModalProp
         >
             <DialogTrigger asChild>
                 <Button
-                    className='flex items-center gap-x-2'
+                    className='flex-shrink-0 gap-x-2'
                     size={size}
                 >
                     <CirclePlus className='size-4' />
@@ -126,7 +126,7 @@ export const AddBonusProgramsModal = ({ size = 'sm' }: AddBonusProgramsModalProp
                                         Бонусні ліміти (один або декілька варіантів)
                                     </FormLabel>
                                     <div className='flex items-center gap-x-2'>
-                                        <FormControl className=''>
+                                        <FormControl>
                                             <MultiSelect
                                                 modalPopover
                                                 maxCount={2}

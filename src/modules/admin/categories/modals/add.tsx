@@ -35,7 +35,11 @@ import {
 
 type CategoriesFormValues = Zod.infer<typeof categoriesSchema>
 
-export const AddCategoriesModal = () => {
+interface AddCategoryModalProps {
+    size?: 'icon' | 'sm'
+}
+
+export const AddCategoryModal = ({ size = 'sm' }: AddCategoryModalProps) => {
     const [open, setOpen] = useState(false)
 
     const [addCategories, { isLoading }] = useAddCategoriesMutation()
@@ -72,9 +76,12 @@ export const AddCategoriesModal = () => {
             onOpenChange={setOpen}
         >
             <DialogTrigger asChild>
-                <Button size='sm'>
-                    <CirclePlus className='mr-2 size-4' />
-                    Додати нову категорію
+                <Button
+                    className='flex-shrink-0 gap-x-2'
+                    size={size}
+                >
+                    <CirclePlus className='size-4' />
+                    {size === 'icon' ? '' : 'Додати нову категорію'}
                 </Button>
             </DialogTrigger>
             <DialogContent className='mx-2 rounded-md'>

@@ -15,12 +15,12 @@ import { Input } from '@/components/ui/input'
 import { producerSchema } from '@/config/validation-schemas'
 import { useCustomForm } from '@/hooks/use-custom-form'
 import { usePatchProducerMutation } from '@/store/api/producers/producers'
-import type { Producer } from '@/store/api/shop-products/shop-products.types'
+import type { ProducersData } from '@/store/api/producers/producers.types'
 
 type ProducerFormValues = Zod.infer<typeof producerSchema>
 
 interface EditProducerProps {
-    producer: Producer
+    producer: ProducersData
 }
 
 export const EditProducerModal = ({ producer }: EditProducerProps) => {

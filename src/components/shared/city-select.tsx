@@ -54,13 +54,15 @@ export const CitySelect = ({ city, setCity, className }: CitySelectProps) => {
         >
             <PopoverTrigger asChild>
                 <Button
-                    className={cn('justify-between', className)}
+                    className={cn('w-full justify-between', className)}
                     variant='outline'
                     size='sm'
                     role='combobox'
                     aria-expanded={open}
                 >
-                    {city?.name && city.name ? city.name : 'Виберіть місто'}
+                    <span className='truncate'>
+                        {city?.name && city.name ? city.name : 'Виберіть місто'}
+                    </span>
                     <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
             </PopoverTrigger>

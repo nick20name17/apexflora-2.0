@@ -2,6 +2,7 @@ import { Loader2, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
+import { getStatusProductsDisplay } from '@/components/shared/product-statuses-cards'
 import { Button } from '@/components/ui/button'
 import {
     Dialog,
@@ -10,23 +11,24 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog'
-import { useRemoveColorMutation } from '@/store/api/colors/colors'
-import type { ColorsData } from '@/store/api/colors/colors.types'
+import { useRemoveStockMutation } from '@/store/api/stock/stock'
+import type { Stock } from '@/store/api/stock/stock.types'
 
-interface RemoveColorModalProps {
-    color: ColorsData
+interface RemoveStockModalProps {
+    stock: Stock
 }
 
-export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
-    const [removeColor, { isLoading }] = useRemoveColorMutation()
+export const RemoveStockModal = ({ stock }: RemoveStockModalProps) => {
+    const [removeStock, { isLoading }] = useRemoveStockMutation()
+    console.log(stock)
 
     const [open, setOpen] = useState(false)
 
-    const handleRemoveColor = (id: number) => {
+    const handleRemoveStock = (id: number) => {
         try {
-            removeColor(id).then(() => {
+            removeStock(id).then(() => {
                 setOpen(false)
-                toast.success('Колір успішно видалено')
+                toast.success('Товар для продажу успішно видалено')
             })
         } catch (error) {
             toast.error('Щось пішло не так')
@@ -49,8 +51,11 @@ export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
             <DialogContent className='mx-2 rounded-md'>
                 <DialogHeader className='text-left'>
                     <DialogTitle>
-                        Видалити колір{' '}
-                        <span className='text-destructive'>{color.name}</span>?
+                        Видалити cтатус{' '}
+                        <span className='text-destructive'>
+                            {getStatusProductsDisplay(stock.status.id).name.toLowerCase()}
+                        </span>
+                        ?
                     </DialogTitle>
                 </DialogHeader>
 
@@ -67,7 +72,7 @@ export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
                     <Button
                         disabled={isLoading}
                         onClick={() => {
-                            handleRemoveColor(color.id)
+                            handleRemoveStock(stock.id)
                         }}
                         size='sm'
                         variant='destructive'

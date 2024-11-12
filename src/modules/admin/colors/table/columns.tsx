@@ -3,9 +3,9 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { EditColorModal } from '../modals/edit'
 import { RemoveColorModal } from '../modals/remove'
 
-import type { Color } from '@/store/api/shop-products/shop-products.types'
+import type { ColorsData } from '@/store/api/colors/colors.types'
 
-export const columns: ColumnDef<Color>[] = [
+export const columns: ColumnDef<ColorsData>[] = [
     {
         accessorKey: 'name',
         header: () => <div className='w-40'>Назва кольору</div>,

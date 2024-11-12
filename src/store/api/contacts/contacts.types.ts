@@ -6,8 +6,8 @@ export interface Contacts {
     email: string
     phone_number: string
     text: string
-    is_read: boolean
-    comment: string
+    is_read?: boolean
+    comment?: string
 }
 
 export type ContactsAddData = Omit<Contacts, 'id'>

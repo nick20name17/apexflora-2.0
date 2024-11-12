@@ -16,12 +16,12 @@ import { Input } from '@/components/ui/input'
 import { colorSchema } from '@/config/validation-schemas'
 import { useCustomForm } from '@/hooks/use-custom-form'
 import { usePatchColorMutation } from '@/store/api/colors/colors'
-import type { Color } from '@/store/api/shop-products/shop-products.types'
+import type { ColorsData } from '@/store/api/colors/colors.types'
 
 type ColorFormValues = Zod.infer<typeof colorSchema>
 
 interface EditColorProps {
-    color: Color
+    color: ColorsData
 }
 
 export const EditColorModal = ({ color }: EditColorProps) => {

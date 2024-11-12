@@ -29,6 +29,7 @@ import { CategoriesPage } from '@/pages/admin/categories-page'
 import { ColorsPage } from '@/pages/admin/colors-page'
 import { ContactPage } from '@/pages/admin/contacts-page'
 import { DiscountsPage } from '@/pages/admin/discounts-page'
+import { AdminOrdersPage } from '@/pages/admin/orders-page'
 import { ProducersPage } from '@/pages/admin/producers-page'
 import { ProductsPage } from '@/pages/admin/products-page'
 import { UsersArchivePage } from '@/pages/admin/users-archive-page'
@@ -189,6 +190,10 @@ const router = createBrowserRouter([
             {
                 path: adminRoutes.products,
                 element: <ProductsPage />
+            },
+            {
+                path: adminRoutes.orders,
+                element: <AdminOrdersPage />
             }
         ]
     },

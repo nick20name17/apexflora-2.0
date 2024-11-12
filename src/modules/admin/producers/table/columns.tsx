@@ -3,9 +3,9 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { EditProducerModal } from '../modals/edit'
 import { RemoveProducerModal } from '../modals/remove'
 
-import type { Producer } from '@/store/api/shop-products/shop-products.types'
+import type { ProducersData } from '@/store/api/producers/producers.types'
 
-export const columns: ColumnDef<Producer>[] = [
+export const columns: ColumnDef<ProducersData>[] = [
     {
         accessorKey: 'name',
         header: () => <div className='w-40'>Назва виробника</div>,

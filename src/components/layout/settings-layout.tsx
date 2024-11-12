@@ -44,7 +44,7 @@ export const SettingsLayout = () => (
 )
 
 const SettingsSidebar = () => {
-    const isUser = useCurrentUserRole('user')
+    const isUser = useCurrentUserRole('client')
 
     const { pathname } = useLocation()
 

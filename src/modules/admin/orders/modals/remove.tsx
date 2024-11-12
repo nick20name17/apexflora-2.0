@@ -10,23 +10,23 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog'
-import { useRemoveColorMutation } from '@/store/api/colors/colors'
-import type { ColorsData } from '@/store/api/colors/colors.types'
+import { useRemoveShopProductsMutation } from '@/store/api/shop-products/shop-products'
+import type { ShopProduct } from '@/store/api/shop-products/shop-products.types'
 
-interface RemoveColorModalProps {
-    color: ColorsData
+interface RemoveShopProductModalProps {
+    shopProduct: ShopProduct
 }
 
-export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
-    const [removeColor, { isLoading }] = useRemoveColorMutation()
+export const RemoveShopProductModal = ({ shopProduct }: RemoveShopProductModalProps) => {
+    const [removeShopProduct, { isLoading }] = useRemoveShopProductsMutation()
 
     const [open, setOpen] = useState(false)
 
-    const handleRemoveColor = (id: number) => {
+    const handleRemoveShopProduct = (id: number) => {
         try {
-            removeColor(id).then(() => {
+            removeShopProduct(id).then(() => {
                 setOpen(false)
-                toast.success('Колір успішно видалено')
+                toast.success('Товар для продажу успішно видалено')
             })
         } catch (error) {
             toast.error('Щось пішло не так')
@@ -49,8 +49,11 @@ export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
             <DialogContent className='mx-2 rounded-md'>
                 <DialogHeader className='text-left'>
                     <DialogTitle>
-                        Видалити колір{' '}
-                        <span className='text-destructive'>{color.name}</span>?
+                        Видалити товар для продажу{' '}
+                        <span className='text-destructive'>
+                            {shopProduct.product.name}
+                        </span>
+                        ?
                     </DialogTitle>
                 </DialogHeader>
 
@@ -67,7 +70,7 @@ export const RemoveColorModal = ({ color }: RemoveColorModalProps) => {
                     <Button
                         disabled={isLoading}
                         onClick={() => {
-                            handleRemoveColor(color.id)
+                            handleRemoveShopProduct(shopProduct.id)
                         }}
                         size='sm'
                         variant='destructive'

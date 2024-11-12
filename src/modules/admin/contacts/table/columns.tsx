@@ -75,7 +75,7 @@ export const columns: ColumnDef<Contacts>[] = [
         header: () => <div className='w-72'>Коментар</div>,
         cell: ({ row }) => (
             <NoteCell
-                key={row.original.comment + row.original.id}
+                key={row?.original?.comment + row.original.id}
                 contact={row.original}
             />
         )

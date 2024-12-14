@@ -77,7 +77,7 @@
 
 @layer base {
     * {
-        @apply border-border;
+        @apply border-border tabular-nums underline-offset-4;
     }
     body {
         @apply bg-background tabular-nums text-foreground;

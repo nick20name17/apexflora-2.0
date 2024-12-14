@@ -28,7 +28,7 @@ import { useCustomForm } from '@/hooks'
 import { cn } from '@/lib/utils'
 import { useGetCoworkersQuery } from '@/store/api/coworkers/coworkers'
 import { useGetDeliverAddressQuery } from '@/store/api/deliver-address/deliver-address'
-import { useAddOrdersMutation } from '@/store/api/orders/orders'
+import { useAddOrderMutation } from '@/store/api/orders/orders'
 import { useAppSelector } from '@/store/hooks/hooks'
 import { selectUser } from '@/store/slices/auth'
 
@@ -42,7 +42,7 @@ export const CheckoutForm = () => {
 
     const userId = user?.id!
 
-    const [addOrder, { isLoading }] = useAddOrdersMutation()
+    const [addOrder, { isLoading }] = useAddOrderMutation()
 
     const handleAddOrder = (values: CheckoutFormValues) => {
         try {

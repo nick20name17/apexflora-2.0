@@ -36,9 +36,28 @@ export const orders = api.injectEndpoints({
             },
             providesTags: ['Orders']
         }),
-        addOrders: build.mutation<void, Partial<OrdersAddData>>({
+        getPreordersCSV: build.query<string, void>({
+            query: () => {
+                return {
+                    url: 'stock/preorder-orders/download-csv/',
+                    headers: {
+                        'Content-Type': 'text/csv'
+                    },
+                    responseHandler: (response: { text: () => any }) => response.text()
+                }
+            }
+        }),
+        addOrder: build.mutation<void, Partial<OrdersAddData>>({
             query: (data) => ({
                 url: `orders/`,
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['Orders']
+        }),
+        addAdminOrder: build.mutation<void, Partial<OrdersAddData>>({
+            query: (data) => ({
+                url: `orders/admin/`,
                 method: 'POST',
                 body: data
             }),
@@ -65,7 +84,9 @@ export const orders = api.injectEndpoints({
 
 export const {
     useGetOrdersQuery,
-    useAddOrdersMutation,
+    useAddAdminOrderMutation,
+    useLazyGetPreordersCSVQuery,
+    useAddOrderMutation,
     usePatchOrdersMutation,
     useRemoveOrdersMutation
 } = orders

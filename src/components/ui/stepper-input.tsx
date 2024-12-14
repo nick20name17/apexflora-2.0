@@ -59,7 +59,7 @@ export const StepperInput = ({
                 onClick={handleDecrement}
                 disabled={value <= min || disabled}
             >
-                <Minus className='h-4 w-4' />
+                <Minus className='size-4' />
             </Button>
             <Input
                 className='h-10 w-20 bg-transparent text-center'
@@ -77,7 +77,7 @@ export const StepperInput = ({
                 onClick={handleIncrement}
                 disabled={value >= max || disabled}
             >
-                <Plus className='h-4 w-4' />
+                <Plus className='size-4' />
             </Button>
         </div>
     )

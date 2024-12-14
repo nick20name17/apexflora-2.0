@@ -118,7 +118,8 @@ export const api = createApi({
         'BonusPrograms',
         'ServiceManager',
         'Products',
-        'Stocks'
+        'Stocks',
+        'OrderItems'
     ]
 })
 

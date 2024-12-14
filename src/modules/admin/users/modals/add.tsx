@@ -32,7 +32,11 @@ import { useAddUserMutation } from '@/store/api/users/users'
 
 type UserFormValues = Zod.infer<typeof userSchema>
 
-export const AddUserModal = () => {
+interface AddUserModalProps {
+    size?: 'sm' | 'icon'
+}
+
+export const AddUserModal = ({ size = 'sm' }: AddUserModalProps) => {
     const [open, setOpen] = useState(false)
 
     const [addUser, { isLoading }] = useAddUserMutation()
@@ -92,9 +96,12 @@ export const AddUserModal = () => {
             onOpenChange={setOpen}
         >
             <DialogTrigger asChild>
-                <Button size='sm'>
-                    <CirclePlus className='mr-2 size-4' />
-                    Додати нового користувача
+                <Button
+                    className='flex-shrink-0 gap-x-2'
+                    size={size}
+                >
+                    <CirclePlus />
+                    {size === 'icon' ? '' : ' Додати нового користувача'}
                 </Button>
             </DialogTrigger>
             <DialogContent className='mx-2 max-w-[800px] rounded-md'>

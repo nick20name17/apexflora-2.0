@@ -64,7 +64,7 @@ export const StepperSelect = ({
                 disabled={value <= min || disabled}
                 aria-label='Decrease value'
             >
-                <Minus className='h-4 w-4' />
+                <Minus className='size-4' />
             </Button>
             <Select
                 disabled={disabled}
@@ -92,7 +92,7 @@ export const StepperSelect = ({
                 disabled={value >= max || disabled}
                 aria-label='Increase value'
             >
-                <Plus className='h-4 w-4' />
+                <Plus className='size-4' />
             </Button>
         </div>
     )

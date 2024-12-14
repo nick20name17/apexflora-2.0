@@ -21,7 +21,7 @@ export const AdminLayout = () => {
             <MetaHead />
             <SidebarProvider>
                 <AdminSidebar />
-                <main className='container px-4'>
+                <main className='w-full px-4'>
                     <SidebarTrigger />
 
                     <ErrorBoundary fallback={<ErrorPage message='Щось пішло не так' />}>
@@ -30,7 +30,10 @@ export const AdminLayout = () => {
                 </main>
             </SidebarProvider>
 
-            <Toaster richColors />
+            <Toaster
+                richColors
+                duration={6000}
+            />
         </QueryParamProvider>
     )
 }

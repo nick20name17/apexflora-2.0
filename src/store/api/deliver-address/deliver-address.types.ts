@@ -10,7 +10,7 @@ export interface DeliverAddress {
 }
 
 export interface DeliverAddressQueryParams extends BaseQueryParams {
-    creator: number
+    creator?: number
 }
 
 export type DeliverAddressAddData = Omit<DeliverAddress, 'id'>

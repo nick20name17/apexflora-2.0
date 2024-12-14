@@ -2,8 +2,6 @@ import { Check, ChevronsUpDown, Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { AddProductModal } from '../modals/add-product'
-
 import { Button } from '@/components/ui/button'
 import {
     Command,
@@ -14,21 +12,29 @@ import {
 } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { useGetProductsQuery } from '@/store/api/products/products'
+import { useGetDeliverAddressQuery } from '@/store/api/deliver-address/deliver-address'
 
-interface Product {
+interface Address {
     name: string
     id: string
 }
 
-interface ProductSelectProps extends React.HTMLAttributes<HTMLButtonElement> {
-    product: Product | null
-    setProduct: (product: Product | null) => void
+interface AddressSelectProps extends React.HTMLAttributes<HTMLButtonElement> {
+    address: Address | null
+    setAddress: (address: Address | null) => void
+    recepientId: number
+    disabled: boolean
 }
 
 const defaultLimit = 140
 
-export const ProductSelect = ({ product, setProduct, className }: ProductSelectProps) => {
+export const AddressSelect = ({
+    address,
+    setAddress,
+    className,
+    recepientId,
+    disabled
+}: AddressSelectProps) => {
     const [open, setOpen] = useState(false)
     const [search, setSearch] = useState('')
 
@@ -36,23 +42,25 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
         setSearch(search)
     }, 250)
 
-    const { data, isLoading, isFetching } = useGetProductsQuery({
+    const { data, isLoading, isFetching } = useGetDeliverAddressQuery({
         offset: 0,
         limit: defaultLimit,
-        search: search || ''
+        creator: recepientId
     })
 
-    const products = data?.results || []
+    const addresss = data?.results || []
 
     const options = useMemo(() => {
-        return products.map((product) => ({
-            id: product.id.toString(),
-            name: product?.ukr_name
-        }))
-    }, [products])
+        return addresss
+            .map((address) => ({
+                id: address.id.toString(),
+                name: address?.city + ', ' + address?.street
+            }))
+            .concat([{ id: 'self-pick', name: 'Самовивіз' }])
+    }, [addresss])
 
     return (
-        <div className='flex items-center gap-x-2'>
+        <div className='flex w-full items-center gap-x-2'>
             <Popover
                 modal
                 open={open}
@@ -60,6 +68,7 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
             >
                 <PopoverTrigger asChild>
                     <Button
+                        disabled={disabled}
                         className={cn('w-full justify-between truncate', className)}
                         variant='outline'
                         size='sm'
@@ -67,8 +76,7 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
                         aria-expanded={open}
                     >
                         <span className='truncate'>
-                            {' '}
-                            {product?.name ? product?.name : 'Оберіть продукт'}
+                            {address?.name ? address?.name : 'Оберіть адресу'}
                         </span>
                         <ChevronsUpDown className='ml-2 size-4 shrink-0 opacity-50' />
                     </Button>
@@ -84,7 +92,7 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
                                 defaultValue={search}
                                 className='flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50'
                                 onChange={(e) => handleSearch(e.currentTarget.value)}
-                                placeholder='Введіть назву продукт'
+                                placeholder='Введіть назву адресу'
                             />
                         </div>
 
@@ -100,16 +108,16 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
                                             key={option?.id}
                                             value={option?.id}
                                             onSelect={(selectedName) => {
-                                                const selectedProduct = options.find(
+                                                const selectedAddress = options.find(
                                                     (opt) => opt?.id === selectedName
                                                 )
 
-                                                setProduct(
-                                                    selectedProduct &&
-                                                        selectedProduct?.id ===
-                                                            product?.id
+                                                setAddress(
+                                                    selectedAddress &&
+                                                        selectedAddress?.id ===
+                                                            address?.id
                                                         ? null
-                                                        : selectedProduct || null
+                                                        : selectedAddress || null
                                                 )
 
                                                 setOpen(false)
@@ -118,7 +126,7 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
                                             <Check
                                                 className={cn(
                                                     'mr-2 size-4',
-                                                    product?.id === option?.id
+                                                    address?.id === option?.id
                                                         ? 'opacity-100'
                                                         : 'opacity-0'
                                                 )}
@@ -129,12 +137,11 @@ export const ProductSelect = ({ product, setProduct, className }: ProductSelectP
                                 </CommandGroup>
                             </CommandList>
                         ) : (
-                            <CommandEmpty>Продуктів не знайдено</CommandEmpty>
+                            <CommandEmpty>Адрес не знайдено</CommandEmpty>
                         )}
                     </Command>
                 </PopoverContent>
             </Popover>
-            <AddProductModal size='icon' />
         </div>
     )
 }

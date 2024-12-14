@@ -1,51 +1,8 @@
 import type { Categories } from '../categories/categories.types'
 import type { ShopProduct } from '../shop-products/shop-products.types'
 import type { StatusProductData } from '../status-products/status-products.types'
-import type { User } from '../users/users.types'
 
 import type { BaseQueryParams, PatchData, Response } from '@/types/api'
-
-export type Statuses =
-    | 'pending'
-    | 'approval'
-    | 'shipped'
-    | 'delivered'
-    | ('canceled' & (string & {}))
-
-export interface Order {
-    id: number
-    order_items: OrderItem[]
-    status: Statuses
-    created_at: string
-    recipient: Recipient
-    creator: User
-    comments: Comment[]
-    discount: number
-    address: Address
-    is_visible: boolean
-    is_supplier: boolean
-}
-
-export interface OrdersAddData {
-    status: Statuses
-    recipient: number
-    creator: number
-    is_supplier?: boolean
-    discount: number
-    address: number
-}
-
-export interface AdminOrderItem {
-    id: number
-    amount: number
-}
-
-export interface AdminOrderAddData extends Omit<OrdersAddData, 'address'> {
-    address: number | undefined
-    order_items: AdminOrderItem[]
-}
-
-export type OrdersPatchData = PatchData<OrdersAddData>
 
 export interface OrderItem {
     id: number
@@ -100,7 +57,11 @@ export interface Address {
     description: string
 }
 
-export interface OrdersQueryParams extends BaseQueryParams {
+export type OrderItemsAddData = Partial<OrderItem>
+
+export type OrderItemsPatchData = PatchData<OrderItemsAddData>
+
+export interface OrderItemsQueryParams extends BaseQueryParams {
     creator: string
     is_supplier: boolean
     created_at: string
@@ -111,4 +72,4 @@ export interface OrdersQueryParams extends BaseQueryParams {
     ordering: string
 }
 
-export type OrdersResponse = Response<Order>
+export type OrderItemsResponse = Response<OrderItem>
